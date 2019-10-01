@@ -1,0 +1,194 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01AHJHMAIX7PL5dVqPPzhau5CnhEtuaVLnj",
+    "name": "TN - SQL and Oracle Activites",
+    "title": "TN - SQL and Oracle Activites",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "TN - SQL and Oracle Activites",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01AHJJ7HZBPVH3br57ysJfEq1RnPUXh00ZZ",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC (SQL)",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Insert into Table via JDBC (SQL)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "insert into name\nvalues ('ruslan','ruslan')",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AHJHTG2ZGL83FCkdRWzNpld5mB4zWnxDM",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (SQL)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (SQL)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from name",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AHJJPQ0KO6M2tvkvnInVax19eXOKrScp3",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC (Oracle)",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Insert into Table via JDBC (Oracle)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "insert into TestDB\nvalues ('ruslan','ruslan')",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AHJI5J4G4LJ6yHK4xLZKH64EEleLMoqKt",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (Oracle)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (Oracle)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from TestDB",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr"
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML": {
+      "unique_name": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML",
+      "name": "TN - SQLServerTarget",
+      "title": "TN - SQLServerTarget",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "TestDB",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+        "display_name": "TN - SQLServerTarget",
+        "port": 1433,
+        "server": "ao-db-01.tidalsoft.local"
+      }
+    },
+    "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr": {
+      "unique_name": "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr",
+      "name": "TN - OracleTarget",
+      "title": "TN - OracleTarget",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "orcl.tidalsoft.local",
+        "dbtype": "oracle",
+        "default_runtime_user_id": "definition_runtime_user_01AHJG3G1U3MS0dsX8dfZZjUcUeIgA1vZe9",
+        "display_name": "TN - OracleTarget",
+        "port": 1521,
+        "server": "ao-db-01.tidalsoft.local"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz": {
+      "unique_name": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+      "name": "sa",
+      "title": "sa",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "sa",
+        "password": "*****",
+        "username": "*****"
+      }
+    },
+    "definition_runtime_user_01AHJG3G1U3MS0dsX8dfZZjUcUeIgA1vZe9": {
+      "unique_name": "definition_runtime_user_01AHJG3G1U3MS0dsX8dfZZjUcUeIgA1vZe9",
+      "name": "system",
+      "title": "system",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "system",
+        "password": "*****",
+        "username": "*****"
+      }
+    }
+  }
+}
