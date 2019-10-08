@@ -44,7 +44,30 @@
           "sql_query": "insert into name\nvalues ('ruslan','ruslan')",
           "target": {
             "override_workflow_target": true,
-            "target_id": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML"
+            "target_id": "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANARHBMNT8T3kkiRoslWkZVm9EsWghMMT",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC (SQL)",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Insert into Table via JDBC (SQL)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "insert into  values ('ruslan','ruslan')\nvalues ('ruslan','ruslan')",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M"
           }
         },
         "object_type": "definition_activity"
@@ -71,6 +94,84 @@
           "target": {
             "override_workflow_target": true,
             "target_id": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANB7URM1IWC30EgfVsGNLyfaUOWCx0mcQ",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (SQL)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (SQL)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "ELECT TOP 10 SUBSTRING(qt.TEXT, (qs.statement_start_offset/2)+1,\n((CASE qs.statement_end_offset\nWHEN -1 THEN DATALENGTH(qt.TEXT)\nELSE qs.statement_end_offset\nEND - qs.statement_start_offset)/2)+1),\nqs.execution_count,\nqs.total_logical_reads, qs.last_logical_reads,\nqs.total_logical_writes, qs.last_logical_writes,\nqs.total_worker_time,\nqs.last_worker_time,\nqs.total_elapsed_time/1000000 total_elapsed_time_in_S,\nqs.last_elapsed_time/1000000 last_elapsed_time_in_S,\nqs.last_execution_time,\nqp.query_plan\nFROM sys.dm_exec_query_stats qs\nCROSS APPLY sys.dm_exec_sql_text(qs.sql_handle) qt\nCROSS APPLY sys.dm_exec_query_plan(qs.plan_handle) qp\nORDER BY qs.total_logical_reads DESC -- logical reads\n-- ORDER BY qs.total_logical_writes DESC -- logical writes\n-- ORDER BY qs.total_worker_time DESC -- CPU time",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AN989GEGL5800PC5nOZMR6szVQ5ZpLjgk",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (SQL) Instance",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (SQL) Instance",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from test_table",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANAXTPIB8EX5tVHNH94RMwQOx0B9lkY8j",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (SQL) Instance",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (SQL) Instance",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from  Name",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M"
           }
         },
         "object_type": "definition_activity"
@@ -123,6 +224,32 @@
           }
         },
         "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AHJZQCJSKED4UxfnyEils7gMn7vFnyIKV",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (Oracle)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (Oracle)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT sys_context('USERENV', 'SID') FROM DUAL",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr"
+          }
+        },
+        "object_type": "definition_activity"
       }
     ],
     "categories": [
@@ -132,8 +259,8 @@
   "targets": {
     "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML": {
       "unique_name": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML",
-      "name": "TN - SQLServerTarget",
-      "title": "TN - SQLServerTarget",
+      "name": " SQLServerTargetAdmnUserTESTDB-ao-db-01.tidalsoft.local",
+      "title": " SQLServerTargetAdmnUserTESTDB-ao-db-01.tidalsoft.local",
       "type": "corejava.jdbc_endpoint",
       "base_type": "target",
       "object_type": "definition_target",
@@ -141,15 +268,15 @@
         "database": "TestDB",
         "dbtype": "sqlserver",
         "default_runtime_user_id": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
-        "display_name": "TN - SQLServerTarget",
+        "display_name": " SQLServerTargetAdmnUserTESTDB-ao-db-01.tidalsoft.local",
         "port": 1433,
         "server": "ao-db-01.tidalsoft.local"
       }
     },
     "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr": {
       "unique_name": "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr",
-      "name": "TN - OracleTarget",
-      "title": "TN - OracleTarget",
+      "name": " OracleTargetAdminUser - ao-db-01.tidalsoft.local",
+      "title": " OracleTargetAdminUser - ao-db-01.tidalsoft.local",
       "type": "corejava.jdbc_endpoint",
       "base_type": "target",
       "object_type": "definition_target",
@@ -157,9 +284,26 @@
         "database": "orcl.tidalsoft.local",
         "dbtype": "oracle",
         "default_runtime_user_id": "definition_runtime_user_01AHJG3G1U3MS0dsX8dfZZjUcUeIgA1vZe9",
-        "display_name": "TN - OracleTarget",
+        "display_name": " OracleTargetAdminUser - ao-db-01.tidalsoft.local",
         "port": 1521,
         "server": "ao-db-01.tidalsoft.local"
+      }
+    },
+    "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M": {
+      "unique_name": "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M",
+      "name": "SQLInstanceConnection_TestDB_AdminUser PO-W12R2-MYSQL",
+      "title": "SQLInstanceConnection_TestDB_AdminUser PO-W12R2-MYSQL",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "TestDB ",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+        "display_name": "SQLInstanceConnection_TestDB_AdminUser PO-W12R2-MYSQL",
+        "instance_name": "CPO",
+        "port": 0,
+        "server": "PO-W12R2-MYSQL"
       }
     }
   },
