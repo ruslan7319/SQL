@@ -1,0 +1,860 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I",
+    "name": "Copy-TN - SQL and Oracle Activites",
+    "title": "Copy-TN - SQL and Oracle Activites",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Copy-TN - SQL and Oracle Activites",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01ANJ81PSKLIW6uEUmhxDPCRGNMvVRgiyUj",
+        "name": "Call Procedure via JDBC",
+        "title": " System SQL Server Procedure  with no input parameters)",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": " System SQL Server Procedure  with no input parameters)",
+          "persist_output": false,
+          "populate_columns": true,
+          "procedure_name": "sp_updatestats;",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01ANGYF09DGFS6vLILlPOoLyW5oEEzxWEYO"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AOAS6NANEKW0qKSVUMx1EsZztikYjn8Tt",
+        "name": "Condition Block",
+        "title": "Validate user can run system procedures  and access  database",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Validate user can run system procedures  and access  database",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AOAS7ADJM7H4Nzlaq7NyhWLb7F0NIeKRe",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01ANJ81PSKLIW6uEUmhxDPCRGNMvVRgiyUj.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AOAS7HOQ1ZF2eiDxRWLB1lqUD8kXB0kHf",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01ANJ81PSKLIW6uEUmhxDPCRGNMvVRgiyUj.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AOAUD4FY6FH4n758OCz3ecVwqkr7KGCiB",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "User cannot run default system store procedure "
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01ANHBLC1T2J00sMF4zoxCKDrTmC7zHamGP",
+        "name": "Select from Table via JDBC",
+        "title": "select * from sys.databases ( System Table )",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "select * from sys.databases ( System Table )",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from sys.databases where name = 'AdventureWorks'",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AOB2530E7CE6hl4rGJ2503cN94vAIsedO",
+        "name": "Condition Block",
+        "title": "Validate user can select  form  system tables  ",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Validate user can select  form  system tables  ",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AOB25ERMV445Bo9mXYMOET8KAvbn3HXRk",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01ANJ81PSKLIW6uEUmhxDPCRGNMvVRgiyUj.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AOB25L8DFS42jAhNXhStyBc3l1d71tHfC",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01ANJ81PSKLIW6uEUmhxDPCRGNMvVRgiyUj.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AOB25U63YSV6R0uwmCSW89d9vvdc5zrR2",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "User cannot run  select statement for default system tables "
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AOB624NRA2X32X9ZQhy1xLovKLkItUA1O",
+        "name": "Condition Block",
+        "title": "Validate that test database exists for this environment",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Validate that test database exists for this environment",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AOB62M0IIH44xSkrhK3UgkKtB13zREkae",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01ANHBLC1T2J00sMF4zoxCKDrTmC7zHamGP.output.row_count$",
+                "operator": "eq",
+                "right_operand": 1
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AOB62S2MKF20LgHkMuI6m9C4pYDBlNV3x",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01ANHBLC1T2J00sMF4zoxCKDrTmC7zHamGP.output.row_count$",
+                "operator": "ne",
+                "right_operand": 1
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AOB62YL1B6T1LjNE4Pwe6HDtwCeQskJhu",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "Database  AdventureWorks does not exists other test will be fail please  Deploy it this is free  MS SQL Server database used as example db\n\nhttps://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-2017"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AOA3KVVK6UA5HHVw5oXHS6W608SADUV0A",
+        "name": "Call Procedure via JDBC",
+        "title": "Custom SQL server proecedures with parametes -parameters  set",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Custom SQL server proecedures with parametes -parameters  set",
+          "persist_output": false,
+          "populate_columns": true,
+          "procedure_inputs": [
+            {
+              "input_name": "BusinessEntityID",
+              "input_type": "in",
+              "input_value_type": "integer",
+              "value_data": "234"
+            }
+          ],
+          "procedure_name": "uspGetManagerEmployees",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AOC6O2CSTBK5gnvpvTCFflWHF4bgalYjz",
+        "name": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AOC6ODWWFYI1ETgcHoh38hf9F8ZtS6neu",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AOA3KVVK6UA5HHVw5oXHS6W608SADUV0A.output.row_count$",
+                "operator": "eq",
+                "right_operand": "28"
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AOC6OYGE42S74aKNjbvgvUsFsfmk3ASYM",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AOA3KVVK6UA5HHVw5oXHS6W608SADUV0A.output.row_count$",
+                "operator": "ne",
+                "right_operand": 28
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AOC6P5UR7T85PNe2YGF4PEohJNoNqOedN",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "store procidure uspGetManagerEmployees with current parameter set need to retrun by default 28 records "
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AOA1IRCST233xf3tDKj9HzYAZqkHxIJeM",
+        "name": "Call Procedure via JDBC",
+        "title": "Custom SQL server proecedures with parametes -parameters not set",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Custom SQL server proecedures with parametes -parameters not set",
+          "persist_output": false,
+          "populate_columns": true,
+          "procedure_name": "uspGetManagerEmployees",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AOBJ7ZCPLWW0qUQ2tHnKrZtDhaqwCvfQl",
+        "name": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AOBJ88VU3Y010nAqpiXbbFbt4EhsM7Qvq",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AOA1IRCST233xf3tDKj9HzYAZqkHxIJeM.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AOBJ8H47CZB47BIm7BpYIZYNNPK6Qh4u5",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AOA1IRCST233xf3tDKj9HzYAZqkHxIJeM.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AOBJ8PSTOZ55YIu9q0nrPyNp73iCRF8m4",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "We should not get more then 0 rows for this sp if we set no valid parameter and this SP is required interger as parameter even with NULL value"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AOCOMLVWV637Sdg1Ym5hraq8bQwRM9rFl",
+        "name": "Call Procedure via JDBC",
+        "title": "Custom SQL server proecedures with parametes -parameters  set",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Custom SQL server proecedures with parametes -parameters  set",
+          "persist_output": false,
+          "populate_columns": true,
+          "procedure_inputs": [
+            {
+              "input_name": "BusinessEntityID",
+              "input_type": "in",
+              "input_value_type": "integer",
+              "value_data": "Null"
+            }
+          ],
+          "procedure_name": "uspGetManagerEmployees",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AOCFSHXRY2F2REMTdqskoqWkoI4SRTOak",
+        "name": "Completed",
+        "title": "Completed",
+        "type": "logic.completed",
+        "base_type": "activity",
+        "properties": {
+          "completion_type": "succeeded",
+          "display_name": "Completed"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANHBKW1PM2W0gqjRKWM8taCjkNoXgW3EZ",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC (SQL)",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Insert into Table via JDBC (SQL)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "insert into name\nvalues ('ruslan','ruslan')",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANHBL3SIA2A5lf5E240vy1oCLEl0qhxMs",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC (SQL)",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Insert into Table via JDBC (SQL)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "insert into  values ('ruslan','ruslan')\nvalues ('ruslan','ruslan')",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANHBLJY8ZN931xyY2TQmhrv2AgrH5tdGd",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (SQL)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (SQL)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT TOP 201  SUBSTRING(qt.TEXT, (qs.statement_start_offset/2)+1,\n((CASE qs.statement_end_offset\nWHEN -1 THEN DATALENGTH(qt.TEXT)\nELSE qs.statement_end_offset\nEND - qs.statement_start_offset)/2)+1),\nqs.execution_count,\nqs.total_logical_reads, qs.last_logical_reads,\nqs.total_logical_writes, qs.last_logical_writes,\nqs.total_worker_time,\nqs.last_worker_time,\nqs.total_elapsed_time/1000000 total_elapsed_time_in_S,\nqs.last_elapsed_time/1000000 last_elapsed_time_in_S,\nqs.last_execution_time,\nqp.query_plan\nFROM sys.dm_exec_query_stats qs\nCROSS APPLY sys.dm_exec_sql_text(qs.sql_handle) qt\nCROSS APPLY sys.dm_exec_query_plan(qs.plan_handle) qp\nORDER BY qs.total_logical_reads DESC -- logical reads\n-- ORDER BY qs.total_logical_writes DESC -- logical writes\n-- ORDER BY qs.total_worker_time DESC -- CPU time",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01ANGYF09DGFS6vLILlPOoLyW5oEEzxWEYO"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANJ4WHBU5JQ7VXVZ5Prt5NnNXbFlXwYvg",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (SQL)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (SQL)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "sp_updatestats",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01ANGYF09DGFS6vLILlPOoLyW5oEEzxWEYO"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANHBLRW3KRK4T7BQ31zYbwh19wRX10CKV",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (SQL) Instance",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (SQL) Instance",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from test_table",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANHBLZOX6OD5ysoWTIiJ1TKXPyoeTxMtl",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (SQL) Instance",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (SQL) Instance",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from  Name",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANHBM7PAAAJ6XOUEGv5giGdYNVV6akgqm",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC (Oracle)",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Insert into Table via JDBC (Oracle)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "insert into TestDB\nvalues ('ruslan','ruslan')",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANHBMFM7H7O3pmQebh0yhajTTaYWC1HU5",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (Oracle)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (Oracle)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from TestDB",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ANHBMNCUHQ37ME98wPrpw8cn9t9oXh8c0",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (Oracle)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC (Oracle)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT sys_context('USERENV', 'SID') FROM DUAL",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr"
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML": {
+      "unique_name": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML",
+      "name": " SQLServerTargetAdmnUserTESTDB-ao-db-01.tidalsoft.local",
+      "title": " SQLServerTargetAdmnUserTESTDB-ao-db-01.tidalsoft.local",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "TestDB",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+        "display_name": " SQLServerTargetAdmnUserTESTDB-ao-db-01.tidalsoft.local",
+        "port": 1433,
+        "server": "ao-db-01.tidalsoft.local"
+      }
+    },
+    "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr": {
+      "unique_name": "definition_target_01AHJHJ2BEI3H2AvhMLSsBkULTRJM6kUZbr",
+      "name": " OracleTargetAdminUser - ao-db-01.tidalsoft.local",
+      "title": " OracleTargetAdminUser - ao-db-01.tidalsoft.local",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "orcl.tidalsoft.local",
+        "dbtype": "oracle",
+        "default_runtime_user_id": "definition_runtime_user_01AHJG3G1U3MS0dsX8dfZZjUcUeIgA1vZe9",
+        "display_name": " OracleTargetAdminUser - ao-db-01.tidalsoft.local",
+        "port": 1521,
+        "server": "ao-db-01.tidalsoft.local"
+      }
+    },
+    "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M": {
+      "unique_name": "definition_target_01AMNYAUYYHS670SRaPUrtNoxLl6wIGqn0M",
+      "name": "SQLInstanceConnection_TestDB_AdminUser PO-W12R2-MYSQL",
+      "title": "SQLInstanceConnection_TestDB_AdminUser PO-W12R2-MYSQL",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "TestDB ",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+        "display_name": "SQLInstanceConnection_TestDB_AdminUser PO-W12R2-MYSQL",
+        "instance_name": "CPO",
+        "port": 0,
+        "server": "PO-W12R2-MYSQL"
+      }
+    },
+    "definition_target_01ANGYF09DGFS6vLILlPOoLyW5oEEzxWEYO": {
+      "unique_name": "definition_target_01ANGYF09DGFS6vLILlPOoLyW5oEEzxWEYO",
+      "name": "SQLServerMasterDB_PO-W12R2-MYSQL",
+      "title": "SQLServerMasterDB_PO-W12R2-MYSQL",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "master",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+        "display_name": "SQLServerMasterDB_PO-W12R2-MYSQL",
+        "instance_name": "CPO",
+        "port": 0,
+        "server": "PO-W12R2-MYSQL"
+      }
+    },
+    "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo": {
+      "unique_name": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo",
+      "name": "SQLServer_SQLUser_ao-db-01.tidalsoft.local_AdventureWorks",
+      "title": "SQLServer_SQLUser_ao-db-01.tidalsoft.local_AdventureWorks",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "AdventureWorks",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_01ANGTQTWJZCP4QjXEmk7vVcRbJuVXAiNOO",
+        "display_name": "SQLServer_SQLUser_ao-db-01.tidalsoft.local_AdventureWorks",
+        "port": 1433,
+        "server": "ao-db-01.tidalsoft.local"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz": {
+      "unique_name": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+      "name": "sa",
+      "title": "sa",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "sa",
+        "password": "*****",
+        "username": "*****"
+      }
+    },
+    "definition_runtime_user_01AHJG3G1U3MS0dsX8dfZZjUcUeIgA1vZe9": {
+      "unique_name": "definition_runtime_user_01AHJG3G1U3MS0dsX8dfZZjUcUeIgA1vZe9",
+      "name": "system",
+      "title": "system",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "system",
+        "password": "*****",
+        "username": "*****"
+      }
+    },
+    "definition_runtime_user_01ANGTQTWJZCP4QjXEmk7vVcRbJuVXAiNOO": {
+      "unique_name": "definition_runtime_user_01ANGTQTWJZCP4QjXEmk7vVcRbJuVXAiNOO",
+      "name": "SQLDBUser",
+      "title": "SQLDBUser",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "SQLDBUser",
+        "password": "*****",
+        "username": "*****"
+      }
+    }
+  }
+}
