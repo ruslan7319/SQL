@@ -1,0 +1,1150 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n",
+    "name": "TN - Automation  - JDBC DB Activity",
+    "title": "TN - Automation  - JDBC DB Activity",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "tabletype_016R14RP6E08D1vkpvIVQwvU6WjFgzVkeD0",
+        "properties": {
+          "scope": "local",
+          "name": "LocalTable1",
+          "type": "datatype.table",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_016R58XAO9RXL7aIWsm6g8CoPf3z74fmOhq",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "counter",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_016W86U82MJM75gBa5nfsUxCPdANTEXz3iQ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.date",
+        "properties": {
+          "scope": "local",
+          "name": "Date Time",
+          "type": "datatype.date",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_016Q38IZQQY6Q7Ex4lmlf53sddU32jXOuVg",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.number",
+        "properties": {
+          "scope": "local",
+          "name": "Decimal",
+          "type": "datatype.number",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_016Q9T9GDRTBQ0LD8GxHxxpy4VcGuTsOIkU",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "tonyÜ!#",
+          "scope": "local",
+          "name": "stringName",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_016UACI8B2TLA4HainIUF0E34k5xCFAODrn",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 1,
+          "scope": "local",
+          "name": "Integer-1",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_016WVY0CPMUQX59TGTtJGS1WqztqiMhB9z0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "stringSetVar",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_016WZ0B8MTXJ81JB0TacbEgsMnWaOVTWEkb",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_016R14RP6E08D1vkpvIVQwvU6WjFgzVkeD0",
+        "properties": {
+          "value": [
+            {
+              "column_data": {
+                "Age": 6,
+                "Name": "danny"
+              }
+            },
+            {
+              "column_data": {
+                "Age": 6,
+                "Name": "danny"
+              }
+            },
+            {
+              "column_data": {
+                "Age": 6,
+                "Name": "danny"
+              }
+            },
+            {
+              "column_data": {
+                "Age": 6,
+                "Name": "danny"
+              }
+            }
+          ],
+          "scope": "local",
+          "name": "Local Table",
+          "type": "datatype.table",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_016R4FWSPPCSN3Hq0nVTVqxG3qDDSol6gN5",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "scope": "local",
+          "name": "Integer",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_016Q9TECHZHBU1ilgrNOkODQ7pTNuFYirwI",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "TN - Automation  - JDBC DB Activity",
+      "favorite": false,
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "corejava.jdbc_endpoint",
+        "target_id": "definition_target_015I1HQVJG30A6gvVPsOfzOWxWlJ7X8weOF",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_016QYD70FJ4T63eFEEdrykhKGlmCZ9BrPG9",
+        "name": "Delete from Table via JDBC",
+        "title": "Delete from Table via JDBC (Empty Out DB)",
+        "type": "corejava.delete_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Delete from Table via JDBC (Empty Out DB)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "delete LPO_Test_Table\n",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016QYCV6UG09871ZYnASGU3Mk0tAWcHYRx0",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Insert into Table via JDBC",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "Insert into lpo_test_table\nvalues ('$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016UACI8B2TLA4HainIUF0E34k5xCFAODrn$',40,5.7,'4/25/2019 11:59 PM')",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016R0V0F1LAZX6VGhePSOe4KlJeKqcm0Sx5",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (Persist Table)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Select from Table via JDBC (Persist Table)",
+          "persist_output": true,
+          "populate_columns": false,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from lpo_test_table",
+          "table_columns": [
+            {
+              "column_name": "Name",
+              "column_type": "string"
+            },
+            {
+              "column_name": "Age",
+              "column_type": "integer"
+            },
+            {
+              "column_name": "Height",
+              "column_type": "number"
+            },
+            {
+              "column_name": "Date",
+              "column_type": "date"
+            }
+          ],
+          "target": {
+            "override_workflow_target": false,
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_015I1HXICSQSW0xerWPajni6dhmBS5tlp5o",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (All Columns)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Select from Table via JDBC (All Columns)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from lpo_test_table",
+          "target": {
+            "override_workflow_target": false,
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016R12GD5LXBY28E2eK5SgkDOyIWm5beVmc",
+        "name": "Insert Bulk into Table via JDBC",
+        "title": "Insert Bulk (Local Table) (12194) (12192)",
+        "type": "corejava.insert_bulk_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "data_source": "$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016R58XAO9RXL7aIWsm6g8CoPf3z74fmOhq$",
+          "display_name": "Insert Bulk (Local Table) (12194) (12192)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "source_column": "Name",
+              "source_column_type": "string",
+              "target_column": "Name"
+            }
+          ],
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          },
+          "target_table_name": "lpo_test_table"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016R4FGLRUB5862SI1LJ0wlDJbCWLMX4wC0",
+        "name": "Insert Bulk into Table via JDBC",
+        "title": "Insert Bulk (Global Table)  (12194) (12192)",
+        "type": "corejava.insert_bulk_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "data_source": "$global.variable_016R16YVJGCOS05dE0k5xWOpLcNUvmRIy8c.global.variable_016R16YVJGCOS05dE0k5xWOpLcNUvmRIy8c$",
+          "display_name": "Insert Bulk (Global Table)  (12194) (12192)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "source_column": "Name",
+              "source_column_type": "string",
+              "target_column": "Name"
+            },
+            {
+              "source_column": "Age",
+              "source_column_type": "integer",
+              "target_column": "Age"
+            },
+            {
+              "source_column": "Height",
+              "source_column_type": "number",
+              "target_column": "Height"
+            }
+          ],
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          },
+          "target_table_name": "lpo_test_table"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016TLZ2SOSNX66xAXQRL82oOWk0ajoNRW1Y",
+        "name": "Update Table via JDBC",
+        "title": "Update Table via JDBC",
+        "type": "corejava.update_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Update Table via JDBC",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "update LPO_Test_Table set Name = 'Nguyen' where Name = '$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016UACI8B2TLA4HainIUF0E34k5xCFAODrn$'",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016R4ES8LNCX85QxFRxgNcB6baBcBbJDfnj",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (All Columns) (12180)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Select from Table via JDBC (All Columns) (12180)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from lpo_test_table",
+          "target": {
+            "override_workflow_target": false,
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016VXP2LTQOLD0FmlMXHBNCidaTU3NdaVQr",
+        "name": "Select from Table via JDBC",
+        "title": "Select from (Date Column) (12179)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Select from (Date Column) (12179)",
+          "persist_output": true,
+          "populate_columns": false,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select Date from lpo_test_table",
+          "table_columns": [
+            {
+              "column_name": "Date",
+              "column_type": "date"
+            }
+          ],
+          "target": {
+            "override_workflow_target": false,
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016UBB0GB2EQV4BNdPvypYJbq5ERNu5By2f",
+        "name": "Call Procedure via JDBC",
+        "title": "Call Procedure via JDBC (Persist OUT) Int",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Call Procedure via JDBC (Persist OUT) Int",
+          "persist_output": true,
+          "populate_columns": false,
+          "procedure_inputs": [
+            {
+              "input_name": "Number",
+              "input_type": "out",
+              "input_value_type": "integer",
+              "value_data": "1"
+            }
+          ],
+          "procedure_name": "Increment",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "Number",
+              "column_type": "integer"
+            }
+          ],
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016W87K2E7STE4EVm61SEMarYCepoPHutVJ",
+        "name": "While Loop",
+        "title": "While Loop",
+        "type": "logic.while",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "While Loop",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_016W87K5STGVW5m9aNMrdtoekQLmmp6zOmk",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016W86U82MJM75gBa5nfsUxCPdANTEXz3iQ$",
+                "operator": "lte",
+                "right_operand": 5
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_016W81Z51I4VX6cY3KAPA0NH10Ze0dIszu6",
+                "name": "Call Procedure via JDBC",
+                "title": "Call Procedure via JDBC (Persist OUT) String",
+                "type": "corejava.call_procedure_via_jdbc",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Call Procedure via JDBC (Persist OUT) String",
+                  "persist_output": true,
+                  "populate_columns": false,
+                  "procedure_inputs": [
+                    {
+                      "input_name": "Number",
+                      "input_type": "out",
+                      "input_value_type": "integer",
+                      "value_data": "$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016W86U82MJM75gBa5nfsUxCPdANTEXz3iQ$"
+                    }
+                  ],
+                  "procedure_name": "Increment",
+                  "row_count": 200,
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "table_columns": [
+                    {
+                      "column_name": "Number",
+                      "column_type": "string"
+                    }
+                  ],
+                  "target": {
+                    "override_workflow_target": false,
+                    "override_workflow_target_group_criteria": false,
+                    "use_workflow_target": true,
+                    "use_workflow_target_group": false
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_016W87MTQ5X1B0r2WRFGpmygNragYUjZGs6",
+                "name": "Set Variables",
+                "title": "Set Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Variables",
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016W86U82MJM75gBa5nfsUxCPdANTEXz3iQ$",
+                      "variable_value_new": "$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016W86U82MJM75gBa5nfsUxCPdANTEXz3iQ$+1"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_016W828ACCUXG0tq7inBOzFOMS8tCbEbNUu",
+        "name": "Call Procedure via JDBC",
+        "title": "Call Procedure via JDBC (Persist OUT) Dec",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Call Procedure via JDBC (Persist OUT) Dec",
+          "persist_output": true,
+          "populate_columns": false,
+          "procedure_inputs": [
+            {
+              "input_name": "Number",
+              "input_type": "out",
+              "input_value_type": "string",
+              "value_data": "1"
+            }
+          ],
+          "procedure_name": "Increment",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "Number",
+              "column_type": "number"
+            }
+          ],
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016VYD6WAPOR232XOlfnn0Oh5bA21fumkIM",
+        "name": "Call Procedure via JDBC",
+        "title": "Call Procedure via JDBC (Persist) DateTime",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Call Procedure via JDBC (Persist) DateTime",
+          "persist_output": true,
+          "populate_columns": false,
+          "procedure_inputs": [
+            {
+              "input_name": "Number",
+              "input_type": "out",
+              "input_value_type": "boolean",
+              "value_data": "5"
+            }
+          ],
+          "procedure_name": "Increment",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "Number",
+              "column_type": "integer"
+            }
+          ],
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016VXXHMQ1PU51Jv51YZdQ6hbG1G3ISZlfy",
+        "name": "Call Procedure via JDBC",
+        "title": "Call Procedure via JDBC (All Columns) (12226)",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "description": "Need to change this to Read All Columns",
+          "display_name": "Call Procedure via JDBC (All Columns) (12226)",
+          "persist_output": true,
+          "populate_columns": false,
+          "procedure_name": "Increment",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "Name",
+              "column_type": "string"
+            }
+          ],
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_017681C18FADL5pVEI6Bm2ndFrJ2ylnxsyf",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Insert into Table via JDBC",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sql_query": "Insert into lpo_test_table\nvalues ('$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016UACI8B2TLA4HainIUF0E34k5xCFAODrn$',40,5.7,'4/25/2019 11:59 PM')",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016VXTMENM5V26JHjU3wkkYo3DOK42voyYy",
+        "name": "Delete from Table via JDBC",
+        "title": "Delete from Table via JDBC (Date)",
+        "type": "corejava.delete_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Delete from Table via JDBC (Date)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sql_query": "Delete from LPO_Test_table\nwhere Date = '$activity.definition_activity_016VXP2LTQOLD0FmlMXHBNCidaTU3NdaVQr.output.select_from_via_jdbc[0].Date$'",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_017681KEYIO8I4v4AP15pF3RwRYvcXqTeVM",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Insert into Table via JDBC",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sql_query": "Insert into lpo_test_table\nvalues ('$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016UACI8B2TLA4HainIUF0E34k5xCFAODrn$',40,5.7,'4/25/2019 11:59 PM')",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016VXMVKT1ADD5ZwOirc9o5i6v4uf4WbViE",
+        "name": "Delete from Table via JDBC",
+        "title": "Delete from Table via JDBC (Name)",
+        "type": "corejava.delete_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Delete from Table via JDBC (Name)",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sql_query": "Delete from LPO_Test_table\nwhere Name = 'Nguyen'",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016VXQ30TOCVN2efU6h0rIk2EloFHoMDei0",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC (All Columns)",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Select from Table via JDBC (All Columns)",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from lpo_test_table",
+          "target": {
+            "override_workflow_target": false,
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016WYZYBM14ST6Mh3K4fYrg2XQGz3p6yCmu",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016WZ0B8MTXJ81JB0TacbEgsMnWaOVTWEkb$",
+              "variable_value_new": "$activity.definition_activity_016R0V0F1LAZX6VGhePSOe4KlJeKqcm0Sx5.output.select_from_via_jdbc[0].Name$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_016W8RQ1LJF6R6v3U1HCiscRYKIdvghjsBs",
+        "name": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_016W8RQ4K9SAH32gybsdp9HZr8hIXJC4q38",
+            "name": "Condition Branch",
+            "title": "WF Automation PASSED",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": {
+                    "left_operand": {
+                      "left_operand": {
+                        "left_operand": {
+                          "left_operand": {
+                            "left_operand": {
+                              "left_operand": {
+                                "left_operand": {
+                                  "left_operand": {
+                                    "left_operand": {
+                                      "left_operand": {
+                                        "left_operand": {
+                                          "left_operand": {
+                                            "left_operand": {
+                                              "left_operand": {
+                                                "left_operand": {
+                                                  "left_operand": "$activity.definition_activity_016QYD70FJ4T63eFEEdrykhKGlmCZ9BrPG9.output.succeeded$",
+                                                  "operator": "eq",
+                                                  "right_operand": true
+                                                },
+                                                "operator": "and",
+                                                "right_operand": {
+                                                  "left_operand": "$activity.definition_activity_016QYCV6UG09871ZYnASGU3Mk0tAWcHYRx0.output.row_count$",
+                                                  "operator": "eq",
+                                                  "right_operand": 1
+                                                }
+                                              },
+                                              "operator": "and",
+                                              "right_operand": {
+                                                "left_operand": "$activity.definition_activity_016R0V0F1LAZX6VGhePSOe4KlJeKqcm0Sx5.output.select_from_via_jdbc[0].Name$",
+                                                "operator": "eq",
+                                                "right_operand": "$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016UACI8B2TLA4HainIUF0E34k5xCFAODrn$"
+                                              }
+                                            },
+                                            "operator": "and",
+                                            "right_operand": {
+                                              "left_operand": "$activity.definition_activity_016R0V0F1LAZX6VGhePSOe4KlJeKqcm0Sx5.output.select_from_via_jdbc[0].Age$",
+                                              "operator": "eq",
+                                              "right_operand": 40
+                                            }
+                                          },
+                                          "operator": "and",
+                                          "right_operand": {
+                                            "left_operand": "$activity.definition_activity_016R0V0F1LAZX6VGhePSOe4KlJeKqcm0Sx5.output.select_from_via_jdbc[0].Height$",
+                                            "operator": "eq",
+                                            "right_operand": 5.7
+                                          }
+                                        },
+                                        "operator": "and",
+                                        "right_operand": {
+                                          "left_operand": "$activity.definition_activity_015I1HXICSQSW0xerWPajni6dhmBS5tlp5o.output.response_body$",
+                                          "operator": "mw",
+                                          "right_operand": "*5.7*"
+                                        }
+                                      },
+                                      "operator": "and",
+                                      "right_operand": {
+                                        "left_operand": "$activity.definition_activity_016R12GD5LXBY28E2eK5SgkDOyIWm5beVmc.output.row_count$",
+                                        "operator": "eq",
+                                        "right_operand": 1
+                                      }
+                                    },
+                                    "operator": "and",
+                                    "right_operand": {
+                                      "left_operand": "$activity.definition_activity_016R4FGLRUB5862SI1LJ0wlDJbCWLMX4wC0.output.row_count$",
+                                      "operator": "eq",
+                                      "right_operand": 1
+                                    }
+                                  },
+                                  "operator": "and",
+                                  "right_operand": {
+                                    "left_operand": "$activity.definition_activity_016TLZ2SOSNX66xAXQRL82oOWk0ajoNRW1Y.output.row_count$",
+                                    "operator": "eq",
+                                    "right_operand": 1
+                                  }
+                                },
+                                "operator": "and",
+                                "right_operand": {
+                                  "left_operand": "$activity.definition_activity_016R4ES8LNCX85QxFRxgNcB6baBcBbJDfnj.output.response_body$",
+                                  "operator": "mw",
+                                  "right_operand": "*Nguyen*"
+                                }
+                              },
+                              "operator": "and",
+                              "right_operand": {
+                                "left_operand": "$activity.definition_activity_016VXP2LTQOLD0FmlMXHBNCidaTU3NdaVQr.output.response_body$",
+                                "operator": "mw",
+                                "right_operand": "*2019-04-25 23:59:00.0*"
+                              }
+                            },
+                            "operator": "and",
+                            "right_operand": {
+                              "left_operand": "$activity.definition_activity_016UBB0GB2EQV4BNdPvypYJbq5ERNu5By2f.output.output_from_procedure_via_jdbc[0].Number$",
+                              "operator": "eq",
+                              "right_operand": 2
+                            }
+                          },
+                          "operator": "and",
+                          "right_operand": {
+                            "left_operand": "$activity.definition_activity_016W87K2E7STE4EVm61SEMarYCepoPHutVJ.output.succeeded$",
+                            "operator": "eq",
+                            "right_operand": true
+                          }
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$activity.definition_activity_016VYD6WAPOR232XOlfnn0Oh5bA21fumkIM.output.succeeded$",
+                          "operator": "eq",
+                          "right_operand": false
+                        }
+                      },
+                      "operator": "and",
+                      "right_operand": {
+                        "left_operand": "$activity.definition_activity_016VXXHMQ1PU51Jv51YZdQ6hbG1G3ISZlfy.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": true
+                      }
+                    },
+                    "operator": "and",
+                    "right_operand": {
+                      "left_operand": "$activity.definition_activity_016VXMVKT1ADD5ZwOirc9o5i6v4uf4WbViE.output.row_count$",
+                      "operator": "eq",
+                      "right_operand": 1
+                    }
+                  },
+                  "operator": "and",
+                  "right_operand": {
+                    "left_operand": "$activity.definition_activity_016VXMVKT1ADD5ZwOirc9o5i6v4uf4WbViE.output.row_count$",
+                    "operator": "eq",
+                    "right_operand": 1
+                  }
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$activity.definition_activity_016VXQ30TOCVN2efU6h0rIk2EloFHoMDei0.output.row_count$",
+                  "operator": "eq",
+                  "right_operand": 0
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "WF Automation PASSED",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_016W8TC8K4TLP7HHtW0q5pITpDRmnss41pX",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "succeeded",
+                  "display_name": "Completed"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_016W8RQ5L893O4xKoxdx1bALngi8IGyEYl6",
+            "name": "Condition Branch",
+            "title": "WF Automation FAILED",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_015I1HSUWP2NN2csm7NjvilOBRqMYG5Qa4n.local.variable_workflow_016W86U82MJM75gBa5nfsUxCPdANTEXz3iQ$",
+                "operator": "ne",
+                "right_operand": 99
+              },
+              "continue_on_failure": false,
+              "display_name": "WF Automation FAILED"
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_016W8TGE8VP6D0m5HwCSM3xxWkd5LQ8IlAb",
+                "name": "Failed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Failed"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_015I1HQVJG30A6gvVPsOfzOWxWlJ7X8weOF": {
+      "unique_name": "definition_target_015I1HQVJG30A6gvVPsOfzOWxWlJ7X8weOF",
+      "name": "TN - MSSQL Target",
+      "title": "TN - MSSQL Target",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "TestDB",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_018IE9GBZF39K2sZ1gJB8H8iQYzHb5gJJdL",
+        "description": "test1",
+        "display_name": "TN - MSSQL Target",
+        "port": 1433,
+        "server": "cpo-2016-sql17e.tidalsoft.local"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_018IE9GBZF39K2sZ1gJB8H8iQYzHb5gJJdL": {
+      "unique_name": "definition_runtime_user_018IE9GBZF39K2sZ1gJB8H8iQYzHb5gJJdL",
+      "name": "CPO-W2012R2-11.tidalsoft.local-sa",
+      "title": "CPO-W2012R2-11.tidalsoft.local-sa",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "CPO-W2012R2-11.tidalsoft.local-sa",
+        "password": "*****",
+        "username": "*****"
+      }
+    }
+  },
+  "variables": {
+    "variable_016R16YVJGCOS05dE0k5xWOpLcNUvmRIy8c": {
+      "unique_name": "variable_016R16YVJGCOS05dE0k5xWOpLcNUvmRIy8c",
+      "schema_id": "tabletype_016R14RP6E08D1vkpvIVQwvU6WjFgzVkeD0",
+      "properties": {
+        "value": [
+          {
+            "column_data": {
+              "Age": 5,
+              "Date": "2019-04-26T18:34:21.002350614Z",
+              "Height": 7.8,
+              "Name": "danny"
+            }
+          },
+          {
+            "column_data": {
+              "Name": "Cade"
+            }
+          },
+          {
+            "column_data": {
+              "Name": "Chace"
+            }
+          }
+        ],
+        "scope": "global",
+        "name": "TN - Bulk Insert Global",
+        "type": "datatype.table",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "table_types": {
+    "tabletype_016R14RP6E08D1vkpvIVQwvU6WjFgzVkeD0": {
+      "unique_name": "tabletype_016R14RP6E08D1vkpvIVQwvU6WjFgzVkeD0",
+      "data_type": "datatype.tabletype",
+      "display_name": "TN - BulkInsert",
+      "columns": [
+        {
+          "maximum": 100,
+          "minimum": 1,
+          "name": "Age",
+          "title": "Age",
+          "type": "integer"
+        },
+        {
+          "name": "Date",
+          "title": "Date",
+          "type": "date"
+        },
+        {
+          "maximum": 100,
+          "minimum": 1,
+          "name": "Height",
+          "title": "Height",
+          "type": "number"
+        },
+        {
+          "maxLength": 100,
+          "name": "Name",
+          "title": "Name",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  }
+}
