@@ -1,17 +1,90 @@
 {
   "workflow": {
     "unique_name": "definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I",
-    "name": "Copy-TN - SQL and Oracle Activites",
-    "title": "Copy-TN - SQL and Oracle Activites",
+    "name": "SQL Server Store Procedure Test",
+    "title": "SQL Server Store Procedure Test",
     "type": "generic.workflow",
     "base_type": "workflow",
-    "variables": null,
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "uspFindProductBySafetyStockLevel",
+          "scope": "input",
+          "name": "Input Store Procedure Name",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01AP6KVD6YA3Z4aG2P7JdG5WS4twyNdsCIh",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "Increment1",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01ATCDK3H58IU6qARIKxicwZ8ejD7PAihki",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "Increment2",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01ATCDV7COL8I5NKn04luRoVpobaiMlfjpu",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Results",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AU9ZHHVOO865nLHnhmo7EjbJJK0xi3z8E",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 1000,
+          "scope": "local",
+          "name": "SafetyStockLevel",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AP65G5Z64MF3oqBLgUnv6LL5t9yziPb64",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 1000,
+          "scope": "input",
+          "name": "InputSafetyStockLevel",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AP670JYXIYY4q7Vqnn3VAhW7S7Fb6dveW",
+        "object_type": "variable_workflow"
+      }
+    ],
     "properties": {
       "atomic": {
         "is_atomic": false
       },
       "delete_workflow_instance": false,
-      "display_name": "Copy-TN - SQL and Oracle Activites",
+      "display_name": "SQL Server Store Procedure Test",
       "runtime_user": {
         "override_target_runtime_user": false,
         "specify_on_workflow_start": false,
@@ -29,13 +102,13 @@
       {
         "unique_name": "definition_activity_01ANJ81PSKLIW6uEUmhxDPCRGNMvVRgiyUj",
         "name": "Call Procedure via JDBC",
-        "title": " System SQL Server Procedure  with no input parameters)",
+        "title": " System  Procedure  with no input parameters)",
         "type": "corejava.call_procedure_via_jdbc",
         "base_type": "activity",
         "properties": {
           "action_timeout": 180,
           "continue_on_failure": true,
-          "display_name": " System SQL Server Procedure  with no input parameters)",
+          "display_name": " System  Procedure  with no input parameters)",
           "persist_output": false,
           "populate_columns": true,
           "procedure_name": "sp_updatestats;",
@@ -55,12 +128,12 @@
       {
         "unique_name": "definition_activity_01AOAS6NANEKW0qKSVUMx1EsZztikYjn8Tt",
         "name": "Condition Block",
-        "title": "Validate user can run system procedures  and access  database",
+        "title": "Verify  that we can run system store procedure",
         "type": "logic.if_else",
         "base_type": "activity",
         "properties": {
           "continue_on_failure": false,
-          "display_name": "Validate user can run system procedures  and access  database",
+          "display_name": "Verify  that we can run system store procedure",
           "skip_execution": false
         },
         "object_type": "definition_activity",
@@ -110,7 +183,7 @@
                 "properties": {
                   "completion_type": "failed-completed",
                   "display_name": "Completed",
-                  "result_message": "User cannot run default system store procedure "
+                  "result_message": "User cannot run default system store procedure  or  not able to access  SQL Server defined as target"
                 },
                 "object_type": "definition_activity"
               }
@@ -145,80 +218,14 @@
         "object_type": "definition_activity"
       },
       {
-        "unique_name": "definition_activity_01AOB2530E7CE6hl4rGJ2503cN94vAIsedO",
-        "name": "Condition Block",
-        "title": "Validate user can select  form  system tables  ",
-        "type": "logic.if_else",
-        "base_type": "activity",
-        "properties": {
-          "continue_on_failure": false,
-          "display_name": "Validate user can select  form  system tables  ",
-          "skip_execution": false
-        },
-        "object_type": "definition_activity",
-        "blocks": [
-          {
-            "unique_name": "definition_activity_01AOB25ERMV445Bo9mXYMOET8KAvbn3HXRk",
-            "name": "Condition Branch",
-            "title": "Test Pass ",
-            "type": "logic.condition_block",
-            "base_type": "activity",
-            "properties": {
-              "condition": {
-                "left_operand": "$activity.definition_activity_01ANJ81PSKLIW6uEUmhxDPCRGNMvVRgiyUj.output.succeeded$",
-                "operator": "eq",
-                "right_operand": true
-              },
-              "continue_on_failure": false,
-              "display_name": "Test Pass ",
-              "skip_execution": false
-            },
-            "object_type": "definition_activity"
-          },
-          {
-            "unique_name": "definition_activity_01AOB25L8DFS42jAhNXhStyBc3l1d71tHfC",
-            "name": "Condition Branch",
-            "title": "Test Fail ",
-            "type": "logic.condition_block",
-            "base_type": "activity",
-            "properties": {
-              "condition": {
-                "left_operand": "$activity.definition_activity_01ANJ81PSKLIW6uEUmhxDPCRGNMvVRgiyUj.output.succeeded$",
-                "operator": "eq",
-                "right_operand": false
-              },
-              "continue_on_failure": true,
-              "display_name": "Test Fail ",
-              "skip_execution": false
-            },
-            "object_type": "definition_activity",
-            "actions": [
-              {
-                "unique_name": "definition_activity_01AOB25U63YSV6R0uwmCSW89d9vvdc5zrR2",
-                "name": "Completed",
-                "title": "Completed",
-                "type": "logic.completed",
-                "base_type": "activity",
-                "properties": {
-                  "completion_type": "failed-completed",
-                  "display_name": "Completed",
-                  "result_message": "User cannot run  select statement for default system tables "
-                },
-                "object_type": "definition_activity"
-              }
-            ]
-          }
-        ]
-      },
-      {
         "unique_name": "definition_activity_01AOB624NRA2X32X9ZQhy1xLovKLkItUA1O",
         "name": "Condition Block",
-        "title": "Validate that test database exists for this environment",
+        "title": "Verify we can run query from system table",
         "type": "logic.if_else",
         "base_type": "activity",
         "properties": {
           "continue_on_failure": false,
-          "display_name": "Validate that test database exists for this environment",
+          "display_name": "Verify we can run query from system table",
           "skip_execution": false
         },
         "object_type": "definition_activity",
@@ -279,13 +286,14 @@
       {
         "unique_name": "definition_activity_01AOA3KVVK6UA5HHVw5oXHS6W608SADUV0A",
         "name": "Call Procedure via JDBC",
-        "title": "Custom SQL server proecedures with parametes -parameters  set",
+        "title": "Custom proecedures with input parameter (parameter  set)",
         "type": "corejava.call_procedure_via_jdbc",
         "base_type": "activity",
         "properties": {
           "action_timeout": 180,
           "continue_on_failure": true,
-          "display_name": "Custom SQL server proecedures with parametes -parameters  set",
+          "description": "we not creating persists table  in AO database",
+          "display_name": "Custom proecedures with input parameter (parameter  set)",
           "persist_output": false,
           "populate_columns": true,
           "procedure_inputs": [
@@ -313,8 +321,14 @@
       {
         "unique_name": "definition_activity_01AOC6O2CSTBK5gnvpvTCFflWHF4bgalYjz",
         "name": "Condition Block",
+        "title": "Veviry that sp with valid input parameter working properly ",
         "type": "logic.if_else",
         "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Veviry that sp with valid input parameter working properly ",
+          "skip_execution": false
+        },
         "object_type": "definition_activity",
         "blocks": [
           {
@@ -371,15 +385,396 @@
         ]
       },
       {
-        "unique_name": "definition_activity_01AOA1IRCST233xf3tDKj9HzYAZqkHxIJeM",
+        "unique_name": "definition_activity_01AQ2031EPWN32YwRw8l28z4sawkt6NsM87",
         "name": "Call Procedure via JDBC",
-        "title": "Custom SQL server proecedures with parametes -parameters not set",
+        "title": "Custom  proecedure outcome   single  mapped column",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 20,
+          "continue_on_failure": true,
+          "description": "Return only one mapped column of data no presist table \nActibvity timeout set to 10 seconds",
+          "display_name": "Custom  proecedure outcome   single  mapped column",
+          "persist_output": false,
+          "populate_columns": false,
+          "procedure_inputs": [
+            {
+              "input_name": "BusinessEntityID",
+              "input_type": "in",
+              "input_value_type": "integer",
+              "value_data": "234"
+            }
+          ],
+          "procedure_name": "uspGetManagerEmployees",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "FIRSTNAME",
+              "column_type": "string"
+            }
+          ],
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AT9LTCA6P2P0rRF9L5QOgYlRSk78qBHA8",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "For Each",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01AQ2031EPWN32YwRw8l28z4sawkt6NsM87.output.output_from_procedure_via_jdbc$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01AT9MMVMPPLA3avt9GAH6M53bI5KzMSBS2",
+            "name": "Sleep",
+            "title": "Sleep",
+            "type": "core.sleep",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": true,
+              "display_name": "Sleep",
+              "skip_execution": false,
+              "sleep_interval": 1
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01ATCE6P1P4V8585an5HzL4gurrg9P12fPC",
+            "name": "Set Variables",
+            "title": "Incremental iterations loop counter",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": true,
+              "display_name": "Incremental iterations loop counter",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01ATCDK3H58IU6qARIKxicwZ8ejD7PAihki$",
+                  "variable_value_new": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01ATCDK3H58IU6qARIKxicwZ8ejD7PAihki$ + 1"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AT74X30G64F2xBajNZ1IU1BzrZKjqqaOf",
+        "name": "Condition Block",
+        "title": "Validate that procedure return  expected number of rows",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Validate that procedure return  expected number of rows",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AT74XFTB9LN7YhV1IOP54hGZN1IIqlFff",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AQ2031EPWN32YwRw8l28z4sawkt6NsM87.output.row_count$",
+                "operator": "eq",
+                "right_operand": "28"
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AT74XO3F4ZI5aPylGa9KqLkUl6qBcKBnN",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AQ2031EPWN32YwRw8l28z4sawkt6NsM87.output.row_count$",
+                "operator": "ne",
+                "right_operand": 28
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AT74XW9ZO4G6p4SrOCAa7OQC60t0IGseZ",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "store procidure uspGetManagerEmployees with current parameter set need to retrun  28  rows"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AT9R3BE6AM748FWJF9t5m4nBtzNGe2p9y",
+        "name": "Condition Block",
+        "title": "Verfy that for each loop reference from activity run properly ",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "description": "we used outcome from  Custom  proecedure outcome   single  mapped column  acftivity as input for  each  condition . This part validate that incremental  local counter increment to 28 times means  for each looop run properly ",
+          "display_name": "Verfy that for each loop reference from activity run properly ",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AT9R3RQTWTO7miSWzoyqlyOZVuMBjEyoA",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01ATCDK3H58IU6qARIKxicwZ8ejD7PAihki$",
+                "operator": "eq",
+                "right_operand": 28
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AT9R42RVL7W6F46ZlJWeU0dafPCsIKmNX",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01ATCDK3H58IU6qARIKxicwZ8ejD7PAihki$",
+                "operator": "lt",
+                "right_operand": 28
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AT9R4C1T5OT5HCT3oUQobFNJa34rOxdLq",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "store procidure uspGetManagerEmployees with current parameter set need to retrun by default 28 iterations  and retrun  different number"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AT7W3NAMS285bf3olHLRX2SOGaBK3UCUn",
+        "name": "Call Procedure via JDBC",
+        "title": "Custom proecedures  persist  tablle , global ref -number of rows",
         "type": "corejava.call_procedure_via_jdbc",
         "base_type": "activity",
         "properties": {
           "action_timeout": 180,
           "continue_on_failure": true,
-          "display_name": "Custom SQL server proecedures with parametes -parameters not set",
+          "description": "Return only one mapped column of data and also create  table in AO database . We cannot  validate Data base but we can count and valdiate array from output of activity . this way we use for each loop  Loop need to run 20 times for test to pass",
+          "display_name": "Custom proecedures  persist  tablle , global ref -number of rows",
+          "persist_output": true,
+          "populate_columns": false,
+          "procedure_inputs": [
+            {
+              "input_name": "BusinessEntityID",
+              "input_type": "in",
+              "input_value_type": "integer",
+              "value_data": "234"
+            }
+          ],
+          "procedure_name": "uspGetManagerEmployees",
+          "row_count": "$global.variable_01AU40XFNKFY17SE4QAfxcXMvciA5BtA50v.global.variable_01AU40XFNKFY17SE4QAfxcXMvciA5BtA50v$",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "FIRSTNAME",
+              "column_type": "string"
+            }
+          ],
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AT9KI4D045Z3p7PgpI961L4RYQ8gi2e7x",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "For Each",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01AT7W3NAMS285bf3olHLRX2SOGaBK3UCUn.output.output_from_procedure_via_jdbc$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01AT9LA8F89QB79mdtAWyPGBxdocjpPw51Q",
+            "name": "Sleep",
+            "title": "Sleep",
+            "type": "core.sleep",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": true,
+              "display_name": "Sleep",
+              "skip_execution": false,
+              "sleep_interval": 1
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01ATCP5O7KK6B6ifOAAJ4NGFM5muBBDl0r0",
+            "name": "Set Variables",
+            "title": "Incremental iterations loop counter",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": true,
+              "description": "incr",
+              "display_name": "Incremental iterations loop counter",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01ATCDV7COL8I5NKn04luRoVpobaiMlfjpu$",
+                  "variable_value_new": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01ATCDV7COL8I5NKn04luRoVpobaiMlfjpu$ + 1"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01ATCPOXWSFPH08jmDWfXGsKw8A4FMORyDq",
+        "name": "Condition Block",
+        "title": "Validate that we retrun proper number of rows set in activity",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "Validate that we retrun proper number of rows set in activity",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01ATCPPAO909B0dju9QZAUk79W4IPscAQaT",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01ATCDV7COL8I5NKn04luRoVpobaiMlfjpu$",
+                "operator": "eq",
+                "right_operand": 20
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01ATCPPH3577F62DNKVOh5Iwc477nQfo6oU",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01ATCDV7COL8I5NKn04luRoVpobaiMlfjpu$",
+                "operator": "lt",
+                "right_operand": 20
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01ATCPPO9BWAZ6jBq8B3rFiB4yy3Z2soZw6",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "store procidure uspGetManagerEmployees with current parameter set need to retrun by 20 iterations  , but return diffrent number"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AOA1IRCST233xf3tDKj9HzYAZqkHxIJeM",
+        "name": "Call Procedure via JDBC",
+        "title": "Custom Procedure required paramert not set",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "description": "Validate that we return proper exception if  user do not enter or map store procedure  reuired input and output parameter",
+          "display_name": "Custom Procedure required paramert not set",
           "persist_output": false,
           "populate_columns": true,
           "procedure_name": "uspGetManagerEmployees",
@@ -399,8 +794,14 @@
       {
         "unique_name": "definition_activity_01AOBJ7ZCPLWW0qUQ2tHnKrZtDhaqwCvfQl",
         "name": "Condition Block",
+        "title": "Verify that sp with not set input parameter properly",
         "type": "logic.if_else",
         "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "Verify that sp with not set input parameter properly",
+          "skip_execution": false
+        },
         "object_type": "definition_activity",
         "blocks": [
           {
@@ -415,7 +816,7 @@
                 "operator": "eq",
                 "right_operand": false
               },
-              "continue_on_failure": false,
+              "continue_on_failure": true,
               "display_name": "Test Pass ",
               "skip_execution": false
             },
@@ -448,7 +849,7 @@
                 "properties": {
                   "completion_type": "failed-completed",
                   "display_name": "Completed",
-                  "result_message": "We should not get more then 0 rows for this sp if we set no valid parameter and this SP is required interger as parameter even with NULL value"
+                  "result_message": "SP should get exception and be mark as failed if we run store procedure without required  input or outpu parameter"
                 },
                 "object_type": "definition_activity"
               }
@@ -459,24 +860,30 @@
       {
         "unique_name": "definition_activity_01AOCOMLVWV637Sdg1Ym5hraq8bQwRM9rFl",
         "name": "Call Procedure via JDBC",
-        "title": "Custom SQL server proecedures with parametes -parameters  set",
+        "title": "Custom  sp with parametes ( in and out)",
         "type": "corejava.call_procedure_via_jdbc",
         "base_type": "activity",
         "properties": {
           "action_timeout": 180,
           "continue_on_failure": true,
-          "display_name": "Custom SQL server proecedures with parametes -parameters  set",
-          "persist_output": false,
+          "description": "in parameter set \nout parameters not set",
+          "display_name": "Custom  sp with parametes ( in and out)",
+          "persist_output": true,
           "populate_columns": true,
           "procedure_inputs": [
             {
-              "input_name": "BusinessEntityID",
+              "input_name": "SafetyStockLevel",
               "input_type": "in",
               "input_value_type": "integer",
-              "value_data": "Null"
+              "value_data": "1000"
+            },
+            {
+              "input_name": "product_count",
+              "input_type": "out",
+              "input_value_type": "integer"
             }
           ],
-          "procedure_name": "uspGetManagerEmployees",
+          "procedure_name": "uspFindProductBySafetyStockLevel",
           "row_count": 200,
           "runtime_user": {
             "override_target_runtime_user": false,
@@ -491,6 +898,459 @@
         "object_type": "definition_activity"
       },
       {
+        "unique_name": "definition_activity_01AP3S3KIEGU54C3sqFB36jF3qp5JBSKcZq",
+        "name": "Condition Block",
+        "title": "Verify that sp with input and ouput parameter work properly ",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "Verify that sp with input and ouput parameter work properly ",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AP3S3WND3WB4BFz8AYrpmBncfP4sn4v56",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AOCOMLVWV637Sdg1Ym5hraq8bQwRM9rFl.output.row_count$",
+                "operator": "eq",
+                "right_operand": 156
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AP3S43VB7O55O1JRLMqqIjbogKBOgkTjY",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AOCOMLVWV637Sdg1Ym5hraq8bQwRM9rFl.output.row_count$",
+                "operator": "ne",
+                "right_operand": 156
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AP3S4BN56XI2ciDwheh0uYYRac6Y3V6Ti",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "Store procecudre reqiured input and output parameter to be set .It also  must return 156 rows if it is fail :\n-  procedure not exists\n-  it is modified and  not required  both input and output\n-  number of rows change or  we not rerturn proper result\n"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AP631SMGF8V64cwoCKpu7RBHy5uivH6ei",
+        "name": "Call Procedure via JDBC",
+        "title": "Custom  sp with parametes ( in and out) ref local variables",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "description": "in parameter set \nout parameters not set",
+          "display_name": "Custom  sp with parametes ( in and out) ref local variables",
+          "persist_output": false,
+          "populate_columns": true,
+          "procedure_inputs": [
+            {
+              "input_name": "SafetyStockLevel",
+              "input_type": "in",
+              "input_value_type": "integer",
+              "value_data": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01AP65G5Z64MF3oqBLgUnv6LL5t9yziPb64$"
+            },
+            {
+              "input_name": "product_count",
+              "input_type": "out",
+              "input_value_type": "integer"
+            }
+          ],
+          "procedure_name": "uspFindProductBySafetyStockLevel",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AP63BTKZPP73jju9Vm6lkmeiASWn3zMmU",
+        "name": "Condition Block",
+        "title": "Verify that sp with  in/ out as local reference work properly ",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "description": "for store procecure input parameter set as local reference and out put not set at all ",
+          "display_name": "Verify that sp with  in/ out as local reference work properly ",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AP63C7VJ8EZ6mvcpSJiA2K1G6ovodhJGG",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AP631SMGF8V64cwoCKpu7RBHy5uivH6ei.output.row_count$",
+                "operator": "eq",
+                "right_operand": 156
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AP63CHQC1HY3rs6qhfrrj2F3xJzBOai1l",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AP631SMGF8V64cwoCKpu7RBHy5uivH6ei.output.row_count$",
+                "operator": "ne",
+                "right_operand": 156
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AP63COJU2QE3z6KxDe8o95bujpQnEvxIq",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "We should not get more then 0 rows for this sp if we set no valid parameter and this SP is required interger as parameter even with NULL value"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AP6HOP2MRBQ2MqpnNOjjqiRffUpKenOIY",
+        "name": "Call Procedure via JDBC",
+        "title": "Custom sp with parametes ( in and out) ref input",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "description": "in parameter set \nout parameters not set",
+          "display_name": "Custom sp with parametes ( in and out) ref input",
+          "persist_output": false,
+          "populate_columns": true,
+          "procedure_inputs": [
+            {
+              "input_name": "SafetyStockLevel",
+              "input_type": "in",
+              "input_value_type": "integer",
+              "value_data": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.input.variable_workflow_01AP670JYXIYY4q7Vqnn3VAhW7S7Fb6dveW$"
+            },
+            {
+              "input_name": "product_count",
+              "input_type": "out",
+              "input_value_type": "integer"
+            }
+          ],
+          "procedure_name": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.input.variable_workflow_01AP6KVD6YA3Z4aG2P7JdG5WS4twyNdsCIh$",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AP6I6Z6V54J3Sb5qnnKRkOrrUgCImVq8g",
+        "name": "Condition Block",
+        "title": "Verify that sp with input  parameter work properly ",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "description": "input reference set as input variable output not set",
+          "display_name": "Verify that sp with input  parameter work properly ",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AP6I7A6UUT377cHmA3WYJwLCpd3iT8o8i",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AP6HOP2MRBQ2MqpnNOjjqiRffUpKenOIY.output.row_count$",
+                "operator": "eq",
+                "right_operand": 156
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AP6I7K0G1743EsugVFJI36hRkWOwEfU08",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AP6HOP2MRBQ2MqpnNOjjqiRffUpKenOIY.output.row_count$",
+                "operator": "ne",
+                "right_operand": 156
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AP6I7RQLV4Z3YDAO0HifU0HqoWjLOg2ri",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "if we use input variable as reference store procedure  must works properly if it is fail  we have problem with reference and parameter using this reference"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01APV9F6JXBEK7QpehRE44JaS5KocafAUdP",
+        "name": "Call Procedure via JDBC",
+        "title": "Custom  sp with parameter as boolean (bit) ",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "description": "in parameter set as integer but in SQL server procedure set as bit which represend boolean value\nout parameters not set",
+          "display_name": "Custom  sp with parameter as boolean (bit) ",
+          "persist_output": false,
+          "populate_columns": true,
+          "procedure_inputs": [
+            {
+              "input_name": "SafetyStockLevel",
+              "input_type": "in",
+              "input_value_type": "integer",
+              "value_data": "1"
+            },
+            {
+              "input_name": "product_count",
+              "input_type": "out",
+              "input_value_type": "integer"
+            }
+          ],
+          "procedure_name": "TestBooleanValue",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AU9PEK17P5E6AiTENTDvMzMLpxVAPVBsO",
+        "name": "Condition Block",
+        "title": "Verify that sp with input bit  parameter work properly ",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "description": "inside SQL Server we use bit type which can be 0,1 or Null same as our Boolean value \nWe make sure it is working as expected",
+          "display_name": "Verify that sp with input bit  parameter work properly ",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AU9PEZFG0D37FS6Qdph7Gde4cDmAGPi74",
+            "name": "Condition Branch",
+            "title": "Test Pass ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01APV9F6JXBEK7QpehRE44JaS5KocafAUdP.output.row_count$",
+                "operator": "eq",
+                "right_operand": 1
+              },
+              "continue_on_failure": false,
+              "display_name": "Test Pass ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AU9PFAZF7NC3otxFnZdnLL3ejDmgD7mzu",
+            "name": "Condition Branch",
+            "title": "Test Fail ",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01APV9F6JXBEK7QpehRE44JaS5KocafAUdP.output.row_count$",
+                "operator": "ne",
+                "right_operand": 1
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Fail ",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AU9PFLF3Z4B36q9LWYfeaqLopvRdTjWDI",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "display_name": "Completed",
+                  "result_message": "we not able to support SQL server bit input type for sp  using our integer variable"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AU9V4AZQPT152UsLe14fKLfDNzrD2scDm",
+        "name": "Select from Table",
+        "title": "Select from Table",
+        "type": "core.selectfromtable",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table",
+          "input_table": "$activity.definition_activity_01AT7W3NAMS285bf3olHLRX2SOGaBK3UCUn.output.output_from_procedure_via_jdbc$",
+          "number_of_rows": {
+            "all_rows": true,
+            "at_most": false
+          },
+          "persist_output": false,
+          "skip_execution": true,
+          "sorting": {
+            "no_sort": true,
+            "sort_by": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ATCEZFPLHYX0TCyNFQYIDIkqzHJx3KeUc",
+        "name": "Set Variables",
+        "title": "Clean up both counter to original values",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Clean up both counter to original values",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01ATCDK3H58IU6qARIKxicwZ8ejD7PAihki$",
+              "variable_value_new": 0
+            },
+            {
+              "variable_to_update": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.local.variable_workflow_01ATCDV7COL8I5NKn04luRoVpobaiMlfjpu$",
+              "variable_value_new": 0
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AU9YVVEDCHO3EgZXWTwxA3dctmTgcOPG5",
+        "name": "Set Variables",
+        "title": "Results",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Results",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01ANHBKFB7CEO3h6XnqGB8DQLCEUoYFNU3I.output.variable_workflow_01AU9ZHHVOO865nLHnhmo7EjbJJK0xi3z8E$",
+              "variable_value_new": "Activity Name | True/False\n-----------------------------------------------------------------------------\n\nSystem  Procedure  with no input parameters)   :  $activity.definition_activity_01AOAS6NANEKW0qKSVUMx1EsZztikYjn8Tt.output.succeeded$\nSelect * from sys.databases - System Table  : $activity.definition_activity_01AOB624NRA2X32X9ZQhy1xLovKLkItUA1O.output.succeeded$\nCustom proecedures with input parameter - parameter  set : $activity.definition_activity_01AOC6O2CSTBK5gnvpvTCFflWHF4bgalYjz.output.succeeded$\nCustom  procedure outcome   single  mapped column -verfication1  : $activity.definition_activity_01AT74X30G64F2xBajNZ1IU1BzrZKjqqaOf.output.succeeded$\nCustom  procedure outcome   single  mapped column  verfication2  : $activity.definition_activity_01AT9R3BE6AM748FWJF9t5m4nBtzNGe2p9y.output.succeeded$\nCustom proecedures  persist  tablle , global ref -number of rows  : $activity.definition_activity_01ATCPOXWSFPH08jmDWfXGsKw8A4FMORyDq.output.succeeded$\nCustom Procedure required parameter not set :$activity.definition_activity_01AOBJ7ZCPLWW0qUQ2tHnKrZtDhaqwCvfQl.output.succeeded$\nCustom  sp with parameters - in and out  :  $activity.definition_activity_01AP3S3KIEGU54C3sqFB36jF3qp5JBSKcZq.output.succeeded$\nCustom  sp with parameters - ref local variables :  $activity.definition_activity_01AP63BTKZPP73jju9Vm6lkmeiASWn3zMmU.output.succeeded$\nCustom sp with parametes ref input : $activity.definition_activity_01AP6I6Z6V54J3Sb5qnnKRkOrrUgCImVq8g.output.succeeded$\nCustom  sp with parameter as boolean  SQL Sever bit data type : $activity.definition_activity_01AU9PEK17P5E6AiTENTDvMzMLpxVAPVBsO.output.succeeded$\n\n\n\n\n\n\n\n\n\n\n"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
         "unique_name": "definition_activity_01AOCFSHXRY2F2REMTdqskoqWkoI4SRTOak",
         "name": "Completed",
         "title": "Completed",
@@ -499,6 +1359,97 @@
         "properties": {
           "completion_type": "succeeded",
           "display_name": "Completed"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AP7QZE2PJ8Z6XVyrtJDzkJGOW4GDY0PkQ",
+        "name": "Call Procedure via JDBC",
+        "title": "Custom SQL server sp with parametes ( in and out) ref input",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "description": "in parameter set  as string SQL expression \nout parameters not set",
+          "display_name": "Custom SQL server sp with parametes ( in and out) ref input",
+          "persist_output": false,
+          "populate_columns": true,
+          "procedure_inputs": [
+            {
+              "input_name": "JobTitle",
+              "input_type": "in",
+              "input_value_type": "string",
+              "value_data": "%Design%"
+            },
+            {
+              "input_name": "people_count",
+              "input_type": "out",
+              "input_value_type": "integer"
+            }
+          ],
+          "procedure_name": "HumanResourcesjobTitaleCount",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": true,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AP4DLVDV4VY3Hr97ffpY8OzZDL3zRtBNG",
+        "name": "Call Procedure via JDBC",
+        "title": "Custom SQL server sp with parametes ( in and out)",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "description": "in parameter set \nout parameters not set",
+          "display_name": "Custom SQL server sp with parametes ( in and out)",
+          "persist_output": false,
+          "populate_columns": true,
+          "procedure_inputs": [
+            {
+              "input_name": "Product ",
+              "input_type": "in",
+              "input_value_type": "string",
+              "value_data": "%Bikes%'"
+            },
+            {
+              "input_name": "MaxPrice",
+              "input_type": "in",
+              "input_value_type": "integer",
+              "value_data": "700"
+            },
+            {
+              "input_name": "ComparePrice",
+              "input_type": "out",
+              "input_value_type": "integer"
+            },
+            {
+              "input_name": "ListPrice",
+              "input_type": "out",
+              "input_value_type": "integer"
+            }
+          ],
+          "procedure_name": "Production.uspGetList",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": true,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
         },
         "object_type": "definition_activity"
       },
@@ -516,7 +1467,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "insert into name\nvalues ('ruslan','ruslan')",
           "target": {
             "override_workflow_target": true,
@@ -539,7 +1490,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "insert into  values ('ruslan','ruslan')\nvalues ('ruslan','ruslan')",
           "target": {
             "override_workflow_target": true,
@@ -565,7 +1516,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "SELECT TOP 201  SUBSTRING(qt.TEXT, (qs.statement_start_offset/2)+1,\n((CASE qs.statement_end_offset\nWHEN -1 THEN DATALENGTH(qt.TEXT)\nELSE qs.statement_end_offset\nEND - qs.statement_start_offset)/2)+1),\nqs.execution_count,\nqs.total_logical_reads, qs.last_logical_reads,\nqs.total_logical_writes, qs.last_logical_writes,\nqs.total_worker_time,\nqs.last_worker_time,\nqs.total_elapsed_time/1000000 total_elapsed_time_in_S,\nqs.last_elapsed_time/1000000 last_elapsed_time_in_S,\nqs.last_execution_time,\nqp.query_plan\nFROM sys.dm_exec_query_stats qs\nCROSS APPLY sys.dm_exec_sql_text(qs.sql_handle) qt\nCROSS APPLY sys.dm_exec_query_plan(qs.plan_handle) qp\nORDER BY qs.total_logical_reads DESC -- logical reads\n-- ORDER BY qs.total_logical_writes DESC -- logical writes\n-- ORDER BY qs.total_worker_time DESC -- CPU time",
           "target": {
             "override_workflow_target": true,
@@ -591,7 +1542,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "sp_updatestats",
           "target": {
             "override_workflow_target": true,
@@ -617,7 +1568,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "select * from test_table",
           "target": {
             "override_workflow_target": true,
@@ -643,7 +1594,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "select * from  Name",
           "target": {
             "override_workflow_target": true,
@@ -666,7 +1617,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "insert into TestDB\nvalues ('ruslan','ruslan')",
           "target": {
             "override_workflow_target": true,
@@ -692,7 +1643,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "select * from TestDB",
           "target": {
             "override_workflow_target": true,
@@ -718,7 +1669,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "SELECT sys_context('USERENV', 'SID') FROM DUAL",
           "target": {
             "override_workflow_target": true,
@@ -855,6 +1806,19 @@
         "password": "*****",
         "username": "*****"
       }
+    }
+  },
+  "variables": {
+    "variable_01AU40XFNKFY17SE4QAfxcXMvciA5BtA50v": {
+      "unique_name": "variable_01AU40XFNKFY17SE4QAfxcXMvciA5BtA50v",
+      "properties": {
+        "value": 20,
+        "scope": "global",
+        "name": "20",
+        "type": "datatype.integer",
+        "is_required": false
+      },
+      "object_type": "variable"
     }
   }
 }
