@@ -9,18 +9,6 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "insert into Production.ProductSubcategory(ProductCategoryID, Name,\n    rowguid, ModifiedDate)\n    values(4, ''Evil Subcategory'', newid(), current_timestamp);--",
-          "scope": "local",
-          "name": "BIKEPAYLOAD",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AV50QD43VDN3cDZTS3vhNL7IVr4TSeObc",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
           "value": "BIKE",
           "scope": "local",
           "name": "VALIDBIKEENTRY",
@@ -52,6 +40,18 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01AUY8JSOHP9S3edsYMeXBzf8UdgfafL1bb",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "insert into Production.ProductSubcategory(ProductCategoryID, Name,\n    rowguid, ModifiedDate)\n    values(4, ''Evil Subcategory'', newid(), current_timestamp);--",
+          "scope": "local",
+          "name": "BIKEPAYLOAD",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AV50QD43VDN3cDZTS3vhNL7IVr4TSeObc",
         "object_type": "variable_workflow"
       }
     ],
