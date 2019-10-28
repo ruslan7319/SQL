@@ -1,8 +1,8 @@
 {
   "workflow": {
     "unique_name": "definition_workflow_01B4E1ERXQTI16hBEsDW5CvcnRdJP8c4QRp",
-    "name": "SQL Injection",
-    "title": "SQL Injection",
+    "name": "SQL Server SQL Injection",
+    "title": "SQL Server SQL Injection",
     "type": "generic.workflow",
     "base_type": "workflow",
     "variables": [
@@ -24,7 +24,7 @@
         "is_atomic": false
       },
       "delete_workflow_instance": false,
-      "display_name": "SQL Injection",
+      "display_name": "SQL Server SQL Injection",
       "runtime_user": {
         "override_target_runtime_user": false,
         "specify_on_workflow_start": false,
@@ -86,9 +86,9 @@
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "$activity.definition_activity_01B4E1OZJXYUK0sFHwBPLep3W70jygkvoGk.output.succeeded$",
+                "left_operand": "$activity.definition_activity_01B4E1OZJXYUK0sFHwBPLep3W70jygkvoGk.output.row_count$",
                 "operator": "eq",
-                "right_operand": true
+                "right_operand": 1
               },
               "continue_on_failure": true,
               "display_name": "TEST PASS",
@@ -104,9 +104,9 @@
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "$activity.definition_activity_01B4E1OZJXYUK0sFHwBPLep3W70jygkvoGk.output.succeeded$",
-                "operator": "eq",
-                "right_operand": false
+                "left_operand": "$activity.definition_activity_01B4E1OZJXYUK0sFHwBPLep3W70jygkvoGk.output.row_count$",
+                "operator": "ne",
+                "right_operand": 1
               },
               "continue_on_failure": false,
               "display_name": "TEST FAIL",
