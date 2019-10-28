@@ -1,0 +1,846 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01B4E1ERXQTI16hBEsDW5CvcnRdJP8c4QRp",
+    "name": "SQL Injection",
+    "title": "SQL Injection",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Result",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01B4E6KD8D7ET2dsAlc6F7SRUa18kjrheyp",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "SQL Injection",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01B4E1OZJXYUK0sFHwBPLep3W70jygkvoGk",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Select from Table via JDBC",
+          "persist_output": true,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from sys.databases where name = 'AdventureWorks'",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B4E3C6RUF553p7ay9kCPUhPEhoueYcDyq",
+        "name": "Condition Block",
+        "title": "Select from Table via JDBC",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01B4E3C9KY3W10gllU0trIMEHi1fnDjH0Rw",
+            "name": "Condition Branch",
+            "title": "TEST PASS",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4E1OZJXYUK0sFHwBPLep3W70jygkvoGk.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST PASS",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01B4E3CAMMVF70Qtcbsqh28F74RVRBLNR6S",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4E1OZJXYUK0sFHwBPLep3W70jygkvoGk.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4E4L1GTLOZ56ck2TQDaDxWOtXPG1cV01",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Completed",
+                  "result_message": "We cannot access target databse  server or database required  for test is not there",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01B4E9RAXBRV33peguA1uZIyNEPuKxr4YIP",
+        "name": "Select from Table via JDBC",
+        "title": "SQL Injection  example 1",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "SQL Injection  example 1",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT Name, ProductNumber, Color\n\nFROM Production.Product\n\nWHERE Name LIKE 'ZZZ' UNION SELECT name, CAST(id AS VARCHAR(10)), '' FROM sysobjects WHERE xtype ='U' --\n;",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B4EB6VLXCZI0TrgdDiCt1cDRmOJcnSEPd",
+        "name": "Condition Block",
+        "title": "SQL Injection  example 1",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "SQL Injection  example 1",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01B4EB6YOG3Z53V6lGYAvBNAdWkCNghaUsS",
+            "name": "Condition Branch",
+            "title": "TEST PASS",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4E9RAXBRV33peguA1uZIyNEPuKxr4YIP.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST PASS",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01B4EB6ZPDN9K1J1AhxXDxpQOADJRFJkHKr",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4E9RAXBRV33peguA1uZIyNEPuKxr4YIP.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4ED02HCEYJ5Bynrd8jAFH5d8XkgH7ooe",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": true,
+                  "display_name": "Completed",
+                  "result_message": "SQL Injection  example 1 . Failed - user able to execute this query via AO",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01B4GCR92509Y6YtdTAfcx3rbDqtn2trNoB",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC Validate Entry",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Select from Table via JDBC Validate Entry",
+          "persist_output": true,
+          "populate_columns": false,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT  ProductSubcategoryID ,\nProductCategoryID ,\nName\nFROM    Production.ProductSubcategory\nwhere [Name] like 'Evil%'",
+          "table_columns": [
+            {
+              "column_name": "ProductSubcategoryID",
+              "column_type": "integer"
+            }
+          ],
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B4GDYR52BTN62kN0Fv8sSkiMwNt8ExUgn",
+        "name": "Condition Block",
+        "title": "Select from Table via JDBC Validate Entry",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC Validate Entry",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01B4GDYU9E01J7Gmh24zFh3IpOLp50IXYUt",
+            "name": "Condition Branch",
+            "title": "ROW EXISTS",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4GCR92509Y6YtdTAfcx3rbDqtn2trNoB.output.row_count$",
+                "operator": "gt",
+                "right_operand": 1
+              },
+              "continue_on_failure": false,
+              "display_name": "ROW EXISTS",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4GF9KXFO0E2QJ6Sdy1lHmOvl5AuEWa8S",
+                "name": "For Each",
+                "title": "Delete Rows with Invalid Data",
+                "type": "logic.for_each",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Delete Rows with Invalid Data",
+                  "skip_execution": false,
+                  "source_array": "$activity.definition_activity_01B4GCR92509Y6YtdTAfcx3rbDqtn2trNoB.output.select_from_via_jdbc$"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01B4GG4E6R9AK3B5nS8S80pPQBjdYCgUZ5b",
+                    "name": "Delete from Table via JDBC",
+                    "title": "Delete  Row",
+                    "type": "corejava.delete_via_jdbc",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": true,
+                      "display_name": "Delete  Row",
+                      "runtime_user": {
+                        "override_target_runtime_user": false,
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "sql_query": "DELETE\nFROM    Production.ProductSubcategory\nwhere  ProductSubcategoryID =$activity.definition_activity_01B4GF9KXFO0E2QJ6Sdy1lHmOvl5AuEWa8S.input.source_array[@].ProductSubcategoryID$",
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+                      }
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01B4GDYVBI3EF5nLQDs94uaa3NQ5J4BuntE",
+            "name": "Condition Branch",
+            "title": "ROWS NOT EXISTS",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4GCR92509Y6YtdTAfcx3rbDqtn2trNoB.output.row_count$",
+                "operator": "lt",
+                "right_operand": 1
+              },
+              "continue_on_failure": false,
+              "display_name": "ROWS NOT EXISTS",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4GMH830KNP27bGHo1aCjpMsl7DyJRJMz",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "succeeded",
+                  "continue_on_failure": false,
+                  "display_name": "Completed",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01B4EFPDSL91D0EMKinEScmLzsvrSOZCpX0",
+        "name": "Select from Table via JDBC",
+        "title": "SQL Injection  example 2",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "SQL Injection  example 2",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT  ProductSubcategoryID ,\nProductCategoryID ,\nName\nFROM    Production.ProductSubcategory\nWHERE   Name LIKE 'nano' insert into Production.ProductSubcategory(ProductCategoryID, Name,\nrowguid, ModifiedDate)\nvalues(4, 'Evil Subcategory', newid(), current_timestamp);--'\n;",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B4EGMT8VQTE5eazVQfIgPqKVpOuKTua2q",
+        "name": "Condition Block",
+        "title": "SQL Injection  example 2",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "SQL Injection  example 2",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01B4EGMWADU0R0mFoBlaWLaX3xLLuU4YfMQ",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4EFPDSL91D0EMKinEScmLzsvrSOZCpX0.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": true,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01B4EGMXFJQ2U4fk5o4gKTNtvQtN8xWMTZn",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4EFPDSL91D0EMKinEScmLzsvrSOZCpX0.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": true,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4EI3UAGD8C6wRRsL7sASjBTGjIbKg1Z7",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": true,
+                  "display_name": "Completed",
+                  "result_message": "SQL Injection  example 2 . Failed - user able to execute this query via AO",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01B4EMIPBZHUJ0sAYOq6Eg5ye8CPkO9uSU5",
+        "name": "Select from Table via JDBC",
+        "title": "SQL Injection  example 3",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "SQL Injection  example 3",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from Sales.Customer where customerId =1  or 1=1",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B4EPJ773Z223TunYiOWLjKnOQXsRUpYrs",
+        "name": "Condition Block",
+        "title": "SQL Injection  example 3",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "SQL Injection  example 3",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01B4EPJABZMGH7Q3DcKAaBVuHU9F1dUtIZd",
+            "name": "Condition Branch",
+            "title": "TEST PASS",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4EMIPBZHUJ0sAYOq6Eg5ye8CPkO9uSU5.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST PASS",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01B4EPJBHA2U12QftJYNpSaajsAFOqP0B5k",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4EMIPBZHUJ0sAYOq6Eg5ye8CPkO9uSU5.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4ERHNDA8C32MAX01R5AQagAN9DavJDC1",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": true,
+                  "display_name": "Completed",
+                  "result_message": "SQL Injection  example 3 . Failed - user able to execute this query via AO",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01B4FED4T6YIR5HK2mzWfOFNIOWn2K6Fhmc",
+        "name": "Select from Table via JDBC",
+        "title": " SQL Injection  example 4",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": " SQL Injection  example 4",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from Sales.Customer where customerId =1 and 1=2\nunion select IS_SRVROLEMEMBER('diskadmin', system_user) ,\nIS_SRVROLEMEMBER('securityadmin', system_user),\nIS_SRVROLEMEMBER('sysadmin', system_user),\nIS_SRVROLEMEMBER('serveradmin', system_user),\n'server '+@@ServerName+'-'+system_user+' '+current_user,null,null\nunion select IS_MEMBER('db_owner') ,\nIS_MEMBER('db_securityadmin'),\nIS_MEMBER('db_accessadmin'),\nIS_MEMBER('db_ddladmin'),\n'Database ='+db_name()+' '+system_user+' '+current_user,null,null\n;",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B4FG0RZRADD2BdUArU4Rqwfr6fcfzARdp",
+        "name": "Condition Block",
+        "title": " SQL Injection  example 4",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": " SQL Injection  example 4",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01B4FG0V093AD1Mj0nQOPXNiCow1ZoauYwG",
+            "name": "Condition Branch",
+            "title": "TEST PASS",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4FED4T6YIR5HK2mzWfOFNIOWn2K6Fhmc.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST PASS",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01B4FG0W1FGXR0k4hXGMFGtVuDNlpPjWMFa",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4FED4T6YIR5HK2mzWfOFNIOWn2K6Fhmc.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4FIM51Y5GC6xHjWbqwktP3xZH8wiKq4e",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": true,
+                  "display_name": "Completed",
+                  "result_message": "SQL Injection  example 4 . Failed - user able to execute this query via AO",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01B4FNQZFQ3IK1BrM5asdUgxyl15HPgaV9N",
+        "name": "Select from Table via JDBC",
+        "title": " SQL Injection  example 5",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": " SQL Injection  example 5",
+          "persist_output": true,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from Sales.Customer where customerId =1and 1=2\nCREATE LOGIN MSSecurityMtr WITH PASSWORD = 'NowIHave@SysAdminPWDHo!Ho!Ho!';\nEXEC master..sp_addsrvrolemember @loginame = N'MSSecurityMtr', @rolename = N'sysadmin'",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B4FOPB771PP4NKGJ663lw58ipOXV2DKI2",
+        "name": "Condition Block",
+        "title": " SQL Injection  example 5",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": " SQL Injection  example 5",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01B4FOPEBO4QN6Wb6r0cZCVYtpsw4SHV40j",
+            "name": "Condition Branch",
+            "title": "TEST PASS",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4FNQZFQ3IK1BrM5asdUgxyl15HPgaV9N.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST PASS",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01B4FOPFJY04562bee0ed8teq0hHnYHFhQj",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4FNQZFQ3IK1BrM5asdUgxyl15HPgaV9N.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4G6UZEUU651KM8Xjqt3qF9fKxMQOzD8T",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": true,
+                  "display_name": "Completed",
+                  "result_message": "SQL Injection  example 5 . Failed - user able to execute this query via AO",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01B4E3GU0A2S00pANBypBtQmKw7DyRtg3ac",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01B4E1ERXQTI16hBEsDW5CvcnRdJP8c4QRp.output.variable_workflow_01B4E6KD8D7ET2dsAlc6F7SRUa18kjrheyp$",
+              "variable_value_new": "Activity Name | True/False\n-----------------------------------------------------------------------------\n\nSelect from system table valid db admin user :  $activity.definition_activity_01B4E3C6RUF553p7ay9kCPUhPEhoueYcDyq.output.succeeded$\n\nSQL Injection  example 1 :  $activity.definition_activity_01B4EB6VLXCZI0TrgdDiCt1cDRmOJcnSEPd.output.succeeded$\nSelect from Table via JDBC Validate Entry : $activity.definition_activity_01B4GDYR52BTN62kN0Fv8sSkiMwNt8ExUgn.output.succeeded$\nSQL Injection  example 2 . :  $activity.definition_activity_01B4EGMT8VQTE5eazVQfIgPqKVpOuKTua2q.output.succeeded$\nSQL Injection  example 3 : $activity.definition_activity_01B4EPJ773Z223TunYiOWLjKnOQXsRUpYrs.output.succeeded$\nSQL Injection  example 4  : $activity.definition_activity_01B4FG0RZRADD2BdUArU4Rqwfr6fcfzARdp.output.succeeded$\nSQL Injection  example 5 :  $activity.definition_activity_01B4FOPB771PP4NKGJ663lw58ipOXV2DKI2.output.succeeded$\n\n"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B4E3N6ZSU0J3gDMVi5i5t8QHtkdPr46Kw",
+        "name": "Completed",
+        "title": "Completed",
+        "type": "logic.completed",
+        "base_type": "activity",
+        "properties": {
+          "completion_type": "succeeded",
+          "continue_on_failure": false,
+          "display_name": "Completed",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML": {
+      "unique_name": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML",
+      "name": " SQLServerTargetAdmnUserTESTDB-ao-db-01.tidalsoft.local",
+      "title": " SQLServerTargetAdmnUserTESTDB-ao-db-01.tidalsoft.local",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "TestDB",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+        "display_name": " SQLServerTargetAdmnUserTESTDB-ao-db-01.tidalsoft.local",
+        "port": 1433,
+        "server": "ao-db-01.tidalsoft.local"
+      }
+    },
+    "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo": {
+      "unique_name": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo",
+      "name": "SQLServer_SQLUser_ao-db-01.tidalsoft.local_AdventureWorks",
+      "title": "SQLServer_SQLUser_ao-db-01.tidalsoft.local_AdventureWorks",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "AdventureWorks",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_01ANGTQTWJZCP4QjXEmk7vVcRbJuVXAiNOO",
+        "display_name": "SQLServer_SQLUser_ao-db-01.tidalsoft.local_AdventureWorks",
+        "port": 1433,
+        "server": "ao-db-01.tidalsoft.local"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz": {
+      "unique_name": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+      "name": "sa",
+      "title": "sa",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "sa",
+        "password": "*****",
+        "username": "*****"
+      }
+    },
+    "definition_runtime_user_01ANGTQTWJZCP4QjXEmk7vVcRbJuVXAiNOO": {
+      "unique_name": "definition_runtime_user_01ANGTQTWJZCP4QjXEmk7vVcRbJuVXAiNOO",
+      "name": "SQLDBUser",
+      "title": "SQLDBUser",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "SQLDBUser",
+        "password": "*****",
+        "username": "*****"
+      }
+    }
+  }
+}
