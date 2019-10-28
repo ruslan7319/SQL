@@ -9,18 +9,6 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "insert into Production.ProductSubcategory(ProductCategoryID, Name,\n    rowguid, ModifiedDate)\n    values(4, ''Evil Subcategory'', newid(), current_timestamp);--",
-          "scope": "local",
-          "name": "BIKEPAYLOAD",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AV50QD43VDN3cDZTS3vhNL7IVr4TSeObc",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
           "value": "BIKE",
           "scope": "local",
           "name": "VALIDBIKEENTRY",
@@ -52,6 +40,18 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01AUY8JSOHP9S3edsYMeXBzf8UdgfafL1bb",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "insert into Production.ProductSubcategory(ProductCategoryID, Name,\n    rowguid, ModifiedDate)\n    values(4, ''Evil Subcategory'', newid(), current_timestamp);--",
+          "scope": "local",
+          "name": "BIKEPAYLOAD",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AV50QD43VDN3cDZTS3vhNL7IVr4TSeObc",
         "object_type": "variable_workflow"
       }
     ],
@@ -138,7 +138,23 @@
               "display_name": "Main Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CR9RYZN5K1tWPn2Ck0qQL2LDxHH5XER",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AUYDETPAOS65j9Y5pCe1eWHrmhYXgcZlW",
@@ -238,7 +254,23 @@
               "display_name": " Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CRKT4UVGR4kdANNlUE7Y0JqbvWjO9zh",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AUYL8X60NOY1LVonruTeFEkwUK5uMliSr",
@@ -330,7 +362,23 @@
               "display_name": "Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CRUAJ5KJI1IbPX0GiDrCfR8y2ElG3NK",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AV14XII3LO15AyY9KIzBMJNObAgKQsyy8",
@@ -486,7 +534,23 @@
               "display_name": "Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CS16N0ACE7E0rWzJWaPLx70dflBei8L",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AV1C4Q2I6NS305DfXl7ek0cjedBTwskvE",
@@ -580,7 +644,23 @@
               "display_name": "Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CS6U08BYY2SBiQfibP3SfzroDS3RKmc",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AV1XX7B9LZC5fr2fuxwLI3qiNDBFCXmL6",
@@ -646,7 +726,23 @@
               "display_name": "Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CSBU1JNIP0w1BqEUOe5HENRpx5lqPbd",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AVX118Q5XAE6Blybagjuva1YgnAyRmD2w",
@@ -740,7 +836,23 @@
               "display_name": "Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CSJSRLJRP7Z7PmkR4O1LJ1fX2TBH4Ez",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AV26SFEFFYO6mXxgPBuWHyFnzAuiQiZHd",
@@ -833,7 +945,23 @@
               "display_name": "Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CSQFBWTGD2VPbzo03ChycIRPhU0j4LW",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AVWWPG2L39O2xpPJkiT3Tf3p7Iqu9rsrH",
@@ -922,7 +1050,23 @@
               "display_name": "Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CSY7JS5WE0qtx3p9KL56zUKwVbvLSrV",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AW04CCQR5865bKX4IOgFfHAptrV8S5hmn",
@@ -1025,7 +1169,23 @@
               "display_name": "Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CT5K3M88C0FwZQhOwy73ITjmIbbCwLV",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AYIOHYJGRE85TbaecU64cN7CSfsibdDcL",
@@ -1161,7 +1321,23 @@
               "display_name": "Test Pass",
               "skip_execution": false
             },
-            "object_type": "definition_activity"
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B4CTCDR5UNL5rJXjnva4y6pRCNmZ8Y6v6",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 1
+                },
+                "object_type": "definition_activity"
+              }
+            ]
           },
           {
             "unique_name": "definition_activity_01AYF8L1J02IN1pZoVReRB1DX4HHILGaxx6",
