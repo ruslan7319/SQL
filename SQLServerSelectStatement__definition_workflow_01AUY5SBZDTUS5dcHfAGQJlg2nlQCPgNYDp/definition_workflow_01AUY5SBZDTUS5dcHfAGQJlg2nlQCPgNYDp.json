@@ -9,6 +9,18 @@
       {
         "schema_id": "datatype.string",
         "properties": {
+          "value": "insert into Production.ProductSubcategory(ProductCategoryID, Name,\n    rowguid, ModifiedDate)\n    values(4, ''Evil Subcategory'', newid(), current_timestamp);--",
+          "scope": "local",
+          "name": "BIKEPAYLOAD",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AV50QD43VDN3cDZTS3vhNL7IVr4TSeObc",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
           "value": "BIKE",
           "scope": "local",
           "name": "VALIDBIKEENTRY",
@@ -21,6 +33,18 @@
       {
         "schema_id": "datatype.string",
         "properties": {
+          "value": "SELECT Ord.SalesOrderID, Ord.OrderDate,\n(SELECT MAX(OrdDet.UnitPrice)\nFROM Sales.SalesOrderDetail AS OrdDet\nWHERE Ord.SalesOrderID = OrdDet.SalesOrderID) AS MaxUnitPrice\nFROM Sales.SalesOrderHeader AS Ord;",
+          "scope": "local",
+          "name": "SELECT",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AYILM2M5VVO6IbMfZfmQklWqd4Wq0QhUW",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
           "value": "",
           "scope": "output",
           "name": "Result",
@@ -28,18 +52,6 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01AUY8JSOHP9S3edsYMeXBzf8UdgfafL1bb",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "insert into Production.ProductSubcategory(ProductCategoryID, Name,\n    rowguid, ModifiedDate)\n    values(4, ''Evil Subcategory'', newid(), current_timestamp);--",
-          "scope": "local",
-          "name": "BIKEPAYLOAD",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AV50QD43VDN3cDZTS3vhNL7IVr4TSeObc",
         "object_type": "variable_workflow"
       }
     ],
@@ -382,10 +394,80 @@
         "object_type": "definition_activity"
       },
       {
+        "unique_name": "definition_activity_01AW0B1YS1TOD6mHsgOYV4xVH9tmIhgDJvZ",
+        "name": "Select from Table via JDBC",
+        "title": "Support for nested select statementm  Persist Table",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Support for nested select statementm  Persist Table",
+          "persist_output": true,
+          "populate_columns": false,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": true,
+            "runtime_user_id": "definition_runtime_user_01ANGTQTWJZCP4QjXEmk7vVcRbJuVXAiNOO"
+          },
+          "skip_execution": false,
+          "sql_query": "$workflow.definition_workflow_01AUY5SBZDTUS5dcHfAGQJlg2nlQCPgNYDp.local.variable_workflow_01AYILM2M5VVO6IbMfZfmQklWqd4Wq0QhUW$",
+          "table_columns": [
+            {
+              "column_name": "OrderDate",
+              "column_type": "date"
+            },
+            {
+              "column_name": "SalesOrderID",
+              "column_type": "integer"
+            },
+            {
+              "column_name": "SalesOrderID",
+              "column_type": "integer"
+            }
+          ],
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AW0E37N9CFY5IOTSlTO9E1k8a5GtytAZU",
+        "name": "Select from Table",
+        "title": "Select from Persist Table",
+        "type": "core.selectfromtable",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Select from Persist Table",
+          "input_table": "$activity.definition_activity_01AW0B1YS1TOD6mHsgOYV4xVH9tmIhgDJvZ.output.select_from_via_jdbc$",
+          "number_of_rows": {
+            "all_rows": true,
+            "at_most": false
+          },
+          "persist_output": false,
+          "skip_execution": true,
+          "sorting": {
+            "no_sort": true,
+            "sort_by": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
         "unique_name": "definition_activity_01AV1C442QHAE5eG1aQ1mXa7Liufw2BWvmG",
         "name": "Condition Block",
+        "title": "Support for nested select statement",
         "type": "logic.if_else",
         "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Support for nested select statement",
+          "skip_execution": false
+        },
         "object_type": "definition_activity",
         "blocks": [
           {
@@ -432,8 +514,10 @@
                 "base_type": "activity",
                 "properties": {
                   "completion_type": "failed-completed",
+                  "continue_on_failure": false,
                   "display_name": "Completed",
-                  "result_message": "We should be able to support  NESTED SELECT statement"
+                  "result_message": "We should be able to support  NESTED SELECT statement",
+                  "skip_execution": false
                 },
                 "object_type": "definition_activity"
               }
@@ -534,6 +618,74 @@
         ]
       },
       {
+        "unique_name": "definition_activity_01AVX10KXZN1D3cSuVZYyN7rZqMk98kqSdf",
+        "name": "Condition Block",
+        "title": "Support select statement Query Duration Time  condition",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "Support select statement Query Duration Time  condition",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AVX10YDEGPF2S85AijZSMafzdLGZOoufi",
+            "name": "Condition Branch",
+            "title": "Test Pass",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AV1XMO30THZ046VKRIBggKtFY0rKn0de9.output.elapsed_time$",
+                "operator": "lt",
+                "right_operand": 5
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Pass",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AVX118Q5XAE6Blybagjuva1YgnAyRmD2w",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AV1XMO30THZ046VKRIBggKtFY0rKn0de9.output.elapsed_time$",
+                "operator": "gt",
+                "right_operand": 5
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AVX11IZ5IMW6jilOtwrPttKb3F2P8pUd1",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Completed",
+                  "result_message": "Duration query execution validation",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "unique_name": "definition_activity_01AV25YIED02V3Pa0e4GBwOP1dTAME4PkpQ",
         "name": "Select from Table via JDBC",
         "title": "Select support for view objects",
@@ -616,8 +768,432 @@
                 "base_type": "activity",
                 "properties": {
                   "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "description": "We  must support make select from view object , but looks like we not ",
                   "display_name": "Completed",
-                  "result_message": "We should support JOIN SELECT statement and retrun valid  number of rows  in this case it is 7 rows"
+                  "result_message": "We should support JOIN SELECT statement and retrun valid  number of rows  in this case it is 7 rows",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AVWVCG8BF9X64Q42JnMRg4ZW2zxyjPCF9",
+        "name": "Select from Table via JDBC",
+        "title": "Select support for  CASE in a HAVING clause",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Select support for  CASE in a HAVING clause",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT JobTitle, MAX(ph1.Rate)AS MaximumRate\nFROM HumanResources.Employee AS e\nJOIN HumanResources.EmployeePayHistory AS ph1 ON e.BusinessEntityID = ph1.BusinessEntityID\nGROUP BY JobTitle\nHAVING (MAX(CASE WHEN Gender = 'M'\nTHEN ph1.Rate\nELSE NULL END) \u003e 40.00\nOR MAX(CASE WHEN Gender  = 'F'\nTHEN ph1.Rate\nELSE NULL END) \u003e 42.00)\nORDER BY MaximumRate DESC;",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AVWWP0BDJNI0bhO4YieQJnJUO1Id8vPfW",
+        "name": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AVWWPAKHD393AFLHZp0RuSnl8ghb6SsGW",
+            "name": "Condition Branch",
+            "title": "Test Pass",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AVWVCG8BF9X64Q42JnMRg4ZW2zxyjPCF9.output.row_count$",
+                "operator": "eq",
+                "right_operand": 12
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Pass",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AVWWPG2L39O2xpPJkiT3Tf3p7Iqu9rsrH",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AVWVCG8BF9X64Q42JnMRg4ZW2zxyjPCF9.output.row_count$",
+                "operator": "ne",
+                "right_operand": 12
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AVWWPNPOX145SG4CeM2ZF0mv4oXFyB9q5",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "description": "we should support  CASE in a HAVING clause  based on queey it should return 12 rows but it does not ",
+                  "display_name": "Completed",
+                  "result_message": "We should support JOIN SELECT statement and retrun valid  number of rows  in this case it is 7 rows",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AW03A65SIW86FJeCcRWrR40D0rRa3ngwp",
+        "name": "Select from Table via JDBC",
+        "title": "Invalid syntax in select statement",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Invalid syntax in select statement",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT JobTitle, MAX(ph1.Rate)AS MaximumRate\nFORM HumanResources.Employee AS e\nJOIN HumanResources.EmployeePayHistory AS ph1 ON e.BusinessEntityID = ph1.BusinessEntityID\nGROUP BY JobTitle\nHAVING (MAX(CASE WHEN Gender = 'M'\nTHEN ph1.Rate\nELSE NULL END) \u003e 40.00\nOR MAX(CASE WHEN Gender  = 'F'\nTHEN ph1.Rate\nELSE NULL END) \u003e 42.00)\nORDER BY MaximumRate DESC;",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AW04BVW7BGQ6WRD3pBeYrQgk5yOXb97S1",
+        "name": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AW04C5M81HX7MPKu867yVscMW8WFidyzS",
+            "name": "Condition Branch",
+            "title": "Test Pass",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AW03A65SIW86FJeCcRWrR40D0rRa3ngwp.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Pass",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AW04CCQR5865bKX4IOgFfHAptrV8S5hmn",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AW03A65SIW86FJeCcRWrR40D0rRa3ngwp.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AW04CJW7HCO39VsaWOl6dix60sgO9WqHp",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "description": "Query with invalid syntax executed ",
+                  "display_name": "Completed",
+                  "result_message": "We should support JOIN SELECT statement and retrun valid  number of rows  in this case it is 7 rows",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AYF6XO6BQLG5mu9Xfr0TfiHWawKkMaRev",
+        "name": "Select from Table via JDBC",
+        "title": "Invalid Column Name mapped to AO from activity table outcome",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Invalid Column Name mapped to AO from activity table outcome",
+          "persist_output": true,
+          "populate_columns": false,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT Ord.SalesOrderID, Ord.OrderDate,\n(SELECT MAX(OrdDet.UnitPrice)\nFROM Sales.SalesOrderDetail AS OrdDet\nWHERE Ord.SalesOrderID = OrdDet.SalesOrderID) AS MaxUnitPrice\nFROM Sales.SalesOrderHeader AS Ord;",
+          "table_columns": [
+            {
+              "column_name": "OrderDate111111111111111111111111111111111111111111",
+              "column_type": "date"
+            },
+            {
+              "column_name": "SalesOrderID1111111111111111111111111111111111111111111",
+              "column_type": "integer"
+            },
+            {
+              "column_name": "MYTEST",
+              "column_type": "date"
+            }
+          ],
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AYIOHGR4KAN6ZeqBvzRyifQ0Oc3VpLV0h",
+        "name": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AYIOHPSGG0E1UaAV5shEGZF0FcmfXHOTc",
+            "name": "Condition Branch",
+            "title": "Test Pass",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AYF6XO6BQLG5mu9Xfr0TfiHWawKkMaRev.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Pass",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AYIOHYJGRE85TbaecU64cN7CSfsibdDcL",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AYF6XO6BQLG5mu9Xfr0TfiHWawKkMaRev.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AYIOI8VPX267Q4onhUnEEtlKOx1SdS0IU",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "description": "Query with invalid syntax executed ",
+                  "display_name": "Completed",
+                  "result_message": "User should get message if  mapped AO  table column name not exixsts in actual table",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AYINVK2BBPF58NjN9zxLQM1wwFE6RTbYN",
+        "name": "Select from Table via JDBC",
+        "title": "SELECT query as local variables ",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "SELECT query as local variables ",
+          "persist_output": true,
+          "populate_columns": false,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT Ord.SalesOrderID, Ord.OrderDate,\n(SELECT MAX(OrdDet.UnitPrice)\nFROM Sales.SalesOrderDetail AS OrdDet\nWHERE Ord.SalesOrderID = OrdDet.SalesOrderID) AS MaxUnitPrice\nFROM Sales.SalesOrderHeader AS Ord;",
+          "table_columns": [
+            {
+              "column_name": "OrderDate111111111111111111111111111111111111111111",
+              "column_type": "date"
+            },
+            {
+              "column_name": "SalesOrderID1111111111111111111111111111111111111111111",
+              "column_type": "integer"
+            },
+            {
+              "column_name": "MYTEST",
+              "column_type": "date"
+            }
+          ],
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AYF8KHG26L84i0tU3ZbFG8iLeoKg2C4RR",
+        "name": "Condition Block",
+        "title": "SELECT query as local variables ",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "SELECT query as local variables ",
+          "persist_output": true,
+          "populate_columns": false,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "SELECT Ord.SalesOrderID, Ord.OrderDate,\n(SELECT MAX(OrdDet.UnitPrice)\nFROM Sales.SalesOrderDetail AS OrdDet\nWHERE Ord.SalesOrderID = OrdDet.SalesOrderID) AS MaxUnitPrice\nFROM Sales.SalesOrderHeader AS Ord;",
+          "table_columns": [
+            {
+              "column_name": "OrderDate111111111111111111111111111111111111111111",
+              "column_type": "date"
+            },
+            {
+              "column_name": "SalesOrderID1111111111111111111111111111111111111111111",
+              "column_type": "integer"
+            },
+            {
+              "column_name": "MYTEST",
+              "column_type": "date"
+            }
+          ],
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AYF8KS0JHBM1n2qnYf6lq95SIrDdZ6PY7",
+            "name": "Condition Branch",
+            "title": "Test Pass",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AYF6XO6BQLG5mu9Xfr0TfiHWawKkMaRev.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": true,
+              "display_name": "Test Pass",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01AYF8L1J02IN1pZoVReRB1DX4HHILGaxx6",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AYF6XO6BQLG5mu9Xfr0TfiHWawKkMaRev.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": true,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AYF8LB6SOWO0V4l7VcFubgivYjkFgnP6J",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "description": "Query with invalid syntax executed ",
+                  "display_name": "Completed",
+                  "result_message": "User should get message if  mapped AO  table column name not exixsts in actual table",
+                  "skip_execution": false
                 },
                 "object_type": "definition_activity"
               }
@@ -642,7 +1218,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "SELECT Name, ProductNumber, Color\n\nFROM Production.Product\n\nWHERE Name LIKE 'ZZZ' UNION SELECT name, CAST(id AS VARCHAR(10)), '' FROM sysobjects WHERE xtype ='U' --\n;",
           "target": {
             "override_workflow_target": true,
@@ -668,7 +1244,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "SELECT  ProductSubcategoryID ,\nProductCategoryID ,\nName\nFROM    Production.ProductSubcategory\nWHERE   Name LIKE 'nano' insert into Production.ProductSubcategory(ProductCategoryID, Name,\nrowguid, ModifiedDate)\nvalues(4, 'Evil Subcategory', newid(), current_timestamp);--'\n;",
           "target": {
             "override_workflow_target": true,
@@ -694,8 +1270,86 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "SELECT  ProductSubcategoryID ,\nProductCategoryID ,\nName\nFROM    Production.ProductSubcategory\nWHERE   Name LIKE '%$workflow.definition_workflow_01AUY5SBZDTUS5dcHfAGQJlg2nlQCPgNYDp.local.variable_workflow_01AV534UT7UK46zKGUZGjM3NsjApgFKgpF5$%'\n;",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AVW636NQ6FK4HGZOkOYTxLG1FC24iRYbX",
+        "name": "Select from Table via JDBC",
+        "title": "SQL Injection  example 4",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "SQL Injection  example 4",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": true,
+          "sql_query": "select * from Sales.Customer where customerId =1  or 1=1\n;",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AVW86S4H7YZ3M1nSgH5fw4OPGqgDDFleF",
+        "name": "Select from Table via JDBC",
+        "title": "SQL Injection  example 5",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "SQL Injection  example 5",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": true,
+          "sql_query": "select * from Sales.Customer where customerId =1 and 1=2\nunion select IS_SRVROLEMEMBER('diskadmin', system_user) ,\nIS_SRVROLEMEMBER('securityadmin', system_user),\nIS_SRVROLEMEMBER('sysadmin', system_user),\nIS_SRVROLEMEMBER('serveradmin', system_user),\n'server '+@@ServerName+'-'+system_user+' '+current_user,null,null\nunion select IS_MEMBER('db_owner') ,\nIS_MEMBER('db_securityadmin'),\nIS_MEMBER('db_accessadmin'),\nIS_MEMBER('db_ddladmin'),\n'Database ='+db_name()+' '+system_user+' '+current_user,null,null\n;",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AVWCT9PPZIQ6z7QnqrIyEPPX6oo3mxmuI",
+        "name": "Select from Table via JDBC",
+        "title": "SQL Injection  example 6",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "SQL Injection  example 6",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": true,
+          "sql_query": "select * from Sales.Customer where customerId =1and 1=2\nCREATE LOGIN MSSecurityMtr WITH PASSWORD = 'NowIHave@SysAdminPWDHo!Ho!Ho!';\nEXEC master..sp_addsrvrolemember @loginame = N'MSSecurityMtr', @rolename = N'sysadmin'\n;",
           "target": {
             "override_workflow_target": true,
             "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
@@ -716,7 +1370,7 @@
           "variables_to_update": [
             {
               "variable_to_update": "$workflow.definition_workflow_01AUY5SBZDTUS5dcHfAGQJlg2nlQCPgNYDp.output.variable_workflow_01AUY8JSOHP9S3edsYMeXBzf8UdgfafL1bb$",
-              "variable_value_new": "Activity Name | True/False\n-----------------------------------------------------------------------------\n\nSelect from system table valid db admin user :  $activity.definition_activity_01AUYDDX7CDR83d31OwDoZg08kltkhBIgNT.output.succeeded$\nSelect from master db  none admin user-negative case : $activity.definition_activity_01AUYL87G9X9R5H7aDHRICAFxypZCM9TIwe.output.succeeded$\nMake sure we support only select statement : $activity.definition_activity_01AV14WTOU8045LASE6oipXDF0bYTAmCUnT.output.succeeded$\nSupport for nested select statement : $activity.definition_activity_01AV1C442QHAE5eG1aQ1mXa7Liufw2BWvmG.output.succeeded$\nSupport for join select statement : $activity.definition_activity_01AV1XWF1VOQZ2PsRJxlcp2GKrR9tPdX0Kp.output.succeeded$\nSelect support for view objects  : $activity.definition_activity_01AV26RRVK3SO4Mps2TLKtCCAxBRpNOmbIv.output.succeeded$"
+              "variable_value_new": "Activity Name | True/False\n-----------------------------------------------------------------------------\n\nSelect from system table valid db admin user :  $activity.definition_activity_01AUYDDX7CDR83d31OwDoZg08kltkhBIgNT.output.succeeded$\nSelect from master db  none admin user-negative case : $activity.definition_activity_01AUYL87G9X9R5H7aDHRICAFxypZCM9TIwe.output.succeeded$\nMake sure we support only select statement : $activity.definition_activity_01AV14WTOU8045LASE6oipXDF0bYTAmCUnT.output.succeeded$\nSupport for nested select statement : $activity.definition_activity_01AV1C442QHAE5eG1aQ1mXa7Liufw2BWvmG.output.succeeded$\nSupport for join select statement : $activity.definition_activity_01AV1XWF1VOQZ2PsRJxlcp2GKrR9tPdX0Kp.output.succeeded$\nSupport select statement Query Duration Time  condition : $activity.definition_activity_01AVX10KXZN1D3cSuVZYyN7rZqMk98kqSdf.output.succeeded$\nSelect support for view objects  : $activity.definition_activity_01AV26RRVK3SO4Mps2TLKtCCAxBRpNOmbIv.output.succeeded$\nSelect support for  CASE in a HAVING clause : $activity.definition_activity_01AVWWP0BDJNI0bhO4YieQJnJUO1Id8vPfW.output.succeeded$\nInvalid syntax in select statement : $activity.definition_activity_01AW04BVW7BGQ6WRD3pBeYrQgk5yOXb97S1.output.succeeded$\nInvalid Column Name mapped to AO from activity table outcome : $activity.definition_activity_01AYF8KHG26L84i0tU3ZbFG8iLeoKg2C4RR.output.succeeded$"
             }
           ]
         },
