@@ -1,0 +1,443 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi",
+    "name": "SQL Server insert/update/delete ",
+    "title": "SQL Server insert/update/delete ",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Tb_BitTABLE",
+          "scope": "local",
+          "name": "TableName",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Result",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01B58ZZT072X21FbXS8DrX9BMaBQ84y2IvJ",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "SQL Server insert/update/delete ",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": true,
+        "target_group": {
+          "target_group_id": "target_group_01B4HX3NQ5SSN6cESueXMIaymaJEcNxWXTo",
+          "run_on_all_targets": false,
+          "selected_target_types": [
+            "corejava.jdbc_endpoint"
+          ],
+          "use_criteria": {
+            "choose_target_using_algorithm": "choose_all_with_matching_criteria",
+            "conditions": [
+              {
+                "operator": "ne",
+                "left_operand": "$targetgroup.corejava jdbc_endpoint.input.dbtype$",
+                "right_operand": "Oracle"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01B4HMMWO440E6Bv5c3WkbqabR2wOja5q7X",
+        "name": "Select from Table via JDBC",
+        "title": "Select from  SYSTEM Table via JDBC",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from  SYSTEM Table via JDBC",
+          "persist_output": true,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select * from sys.databases where name = 'AdventureWorks'",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B58H3JOY5AL22RXGOEWl1JCpJQwnsejBk",
+        "name": "Condition Block",
+        "title": "Select from  SYSTEM Table via JDBC",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Select from  SYSTEM Table via JDBC",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01B58H3N4Y9AP7QoI4QoTELBX24nhW5BlT5",
+            "name": "Condition Branch",
+            "title": "TEST PASS",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4HMMWO440E6Bv5c3WkbqabR2wOja5q7X.output.row_count$",
+                "operator": "eq",
+                "right_operand": 1
+              },
+              "continue_on_failure": false,
+              "display_name": "TEST PASS",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01B58H3OA70XM5JVax9OFCiMNxmfSDqSs5f",
+            "name": "Condition Branch",
+            "title": "TEST FAIL",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B4HMMWO440E6Bv5c3WkbqabR2wOja5q7X.output.row_count$",
+                "operator": "lt",
+                "right_operand": 1
+              },
+              "continue_on_failure": false,
+              "display_name": "TEST FAIL",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B58IQK9EL8S0p0H7T0Uw9aZdLpA3M7DzQ",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Completed",
+                  "result_message": "DB is not exists OR environment is not reachable",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01B597A5KT47G267jX0lL1Yob1RzNPlmWZZ",
+        "name": "Call Procedure via JDBC",
+        "title": "Call Procedure via JDBC  Create Table",
+        "type": "corejava.call_procedure_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Call Procedure via JDBC  Create Table",
+          "persist_output": false,
+          "populate_columns": true,
+          "procedure_inputs": [
+            {
+              "input_name": "tabName",
+              "input_type": "in",
+              "input_value_type": "string",
+              "value_data": "$workflow.definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi.local.variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx$"
+            }
+          ],
+          "procedure_name": "sp_tabCreate",
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B5CJC10TQG25qKAnkzbATdbkk39Y9XRdU",
+        "name": "Select from Table via JDBC",
+        "title": "Verify that table is created ",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Verify that table is created ",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select  * from  $workflow.definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi.local.variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx$",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B5CLQHS3QWR0Jwr31fQz76LIEEQK6QR7R",
+        "name": "Condition Block",
+        "title": "Verify that table is created ",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "Verify that table is created ",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01B5CLQLI4IOS21RCE31svf9k2ZdAEdXalX",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B5CJC10TQG25qKAnkzbATdbkk39Y9XRdU.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01B5CLQMR1KGY6lxXFHqBAjYN4W93l5Xkmg",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01B5CJC10TQG25qKAnkzbATdbkk39Y9XRdU.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B5CNM4DT0W12kH0HfxeP4cMQW6pcwU0es",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Completed",
+                  "result_message": "Table is not created we stop workflow execution . Make sure  table  $workflow.definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi.local.variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx$ is created",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01B5CPV6G3GS443ekSglID1QWM7gPRVXru5",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC . single statement",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Insert into Table via JDBC . single statement",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "insert into $workflow.definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi.local.variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx$ values (0 );\ninsert into [$workflow.definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi.local.variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx$] values (1 );",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B5CSBQRS86M3OhvEkPz1RXIkEQon8lIXp",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "select  *  from   $workflow.definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi.local.variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx$",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B58Z9MFUHTP2tdYNG4Om8ScwXGpcQG1Y8",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi.output.variable_workflow_01B58ZZT072X21FbXS8DrX9BMaBQ84y2IvJ$",
+              "variable_value_new": "Activity Name | True/False\n-----------------------------------------------------------------------------\nSelect from  SYSTEM Table via JDBC  :   $activity.definition_activity_01B58H3JOY5AL22RXGOEWl1JCpJQwnsejBk.output.succeeded$\nVerify that table is created :  $activity.definition_activity_01B5CLQHS3QWR0Jwr31fQz76LIEEQK6QR7R.output.succeeded$\n\n"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML": {
+      "unique_name": "definition_target_01AHJFPE87ZQZ3lWkl7sJBHg7szwtfZITML",
+      "name": " SQLServerTargetAdmnUserMASTER-ao-db-01.tidalsoft.local",
+      "title": " SQLServerTargetAdmnUserMASTER-ao-db-01.tidalsoft.local",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "master",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+        "display_name": " SQLServerTargetAdmnUserMASTER-ao-db-01.tidalsoft.local",
+        "port": 1433,
+        "server": "ao-db-01.tidalsoft.local"
+      }
+    },
+    "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo": {
+      "unique_name": "definition_target_01AO5XYXJDUH81sqSPI29TmaGrHkdzd29Eo",
+      "name": "SQLServer_SQLUser_ao-db-01.tidalsoft.local_AdventureWorks",
+      "title": "SQLServer_SQLUser_ao-db-01.tidalsoft.local_AdventureWorks",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "AdventureWorks",
+        "dbtype": "sqlserver",
+        "default_runtime_user_id": "definition_runtime_user_01ANGTQTWJZCP4QjXEmk7vVcRbJuVXAiNOO",
+        "display_name": "SQLServer_SQLUser_ao-db-01.tidalsoft.local_AdventureWorks",
+        "port": 1433,
+        "server": "ao-db-01.tidalsoft.local"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz": {
+      "unique_name": "definition_runtime_user_01AHJFECS47MR487WBsqTZUQ7LCyFCaHjUz",
+      "name": "sa",
+      "title": "sa",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "sa",
+        "password": "*****",
+        "username": "*****"
+      }
+    },
+    "definition_runtime_user_01ANGTQTWJZCP4QjXEmk7vVcRbJuVXAiNOO": {
+      "unique_name": "definition_runtime_user_01ANGTQTWJZCP4QjXEmk7vVcRbJuVXAiNOO",
+      "name": "SQLDBUser",
+      "title": "SQLDBUser",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "SQLDBUser",
+        "password": "*****",
+        "username": "*****"
+      }
+    }
+  },
+  "target_groups": {
+    "target_group_01B4HX3NQ5SSN6cESueXMIaymaJEcNxWXTo": {
+      "unique_name": "target_group_01B4HX3NQ5SSN6cESueXMIaymaJEcNxWXTo",
+      "name": "JDBC Target Group",
+      "title": "JDBC Target Group",
+      "type": "generic.target_group",
+      "base_type": "target_group",
+      "version": "1.0.0",
+      "targets": [
+        {
+          "data_target_type": "corejava.jdbc_endpoint",
+          "view_target_type": "corejava.jdbc_endpoint",
+          "include_all_targets": true
+        }
+      ],
+      "object_type": "target_group"
+    }
+  }
+}
