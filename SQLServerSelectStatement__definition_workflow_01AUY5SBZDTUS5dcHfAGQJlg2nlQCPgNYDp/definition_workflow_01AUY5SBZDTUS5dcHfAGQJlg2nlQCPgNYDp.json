@@ -190,8 +190,10 @@
                 "base_type": "activity",
                 "properties": {
                   "completion_type": "failed-completed",
+                  "continue_on_failure": false,
                   "display_name": "Completed",
-                  "result_message": "We cannot access target databse  server or database required  for test is not there"
+                  "result_message": "We cannot access target databse  server or database required  for test is not there",
+                  "skip_execution": false
                 },
                 "object_type": "definition_activity"
               }
@@ -482,30 +484,6 @@
         "object_type": "definition_activity"
       },
       {
-        "unique_name": "definition_activity_01AW0E37N9CFY5IOTSlTO9E1k8a5GtytAZU",
-        "name": "Select from Table",
-        "title": "Select from Persist Table",
-        "type": "core.selectfromtable",
-        "base_type": "activity",
-        "properties": {
-          "action_timeout": 180,
-          "continue_on_failure": true,
-          "display_name": "Select from Persist Table",
-          "input_table": "$activity.definition_activity_01AW0B1YS1TOD6mHsgOYV4xVH9tmIhgDJvZ.output.select_from_via_jdbc$",
-          "number_of_rows": {
-            "all_rows": true,
-            "at_most": false
-          },
-          "persist_output": false,
-          "skip_execution": true,
-          "sorting": {
-            "no_sort": true,
-            "sort_by": false
-          }
-        },
-        "object_type": "definition_activity"
-      },
-      {
         "unique_name": "definition_activity_01AV1C442QHAE5eG1aQ1mXa7Liufw2BWvmG",
         "name": "Condition Block",
         "title": "Support for nested select statement",
@@ -581,6 +559,113 @@
                   "continue_on_failure": false,
                   "display_name": "Completed",
                   "result_message": "We should be able to support  NESTED SELECT statement",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01AW0E37N9CFY5IOTSlTO9E1k8a5GtytAZU",
+        "name": "Select from Table",
+        "title": "Select from Persist Table",
+        "type": "core.selectfromtable",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "columns": [
+            {
+              "column_name": "OrderDate",
+              "column_type": "date"
+            },
+            {
+              "column_name": "SalesOrderID",
+              "column_type": "integer"
+            },
+            {
+              "column_name": "SalesOrderID",
+              "column_type": "integer"
+            }
+          ],
+          "continue_on_failure": true,
+          "display_name": "Select from Persist Table",
+          "input_table": "$activity.definition_activity_01AW0B1YS1TOD6mHsgOYV4xVH9tmIhgDJvZ.output.select_from_via_jdbc$",
+          "number_of_rows": {
+            "at_most": true,
+            "first_n_rows": 10
+          },
+          "persist_output": false,
+          "skip_execution": false,
+          "sorting": {
+            "no_sort": true,
+            "sort_by": false
+          },
+          "where_clause": "SalesOrderID  \u003e  43677"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B5749AM63293RjmIOqryNmirq6PLRlrJa",
+        "name": "Condition Block",
+        "title": "Select from Persist Table",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "Select from Persist Table",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01B5749E47NQB7AbfsDCKGQFeY5j6RReu6d",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AW0E37N9CFY5IOTSlTO9E1k8a5GtytAZU.output.row_count$",
+                "operator": "eq",
+                "right_operand": 10
+              },
+              "continue_on_failure": true,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01B5749FJF0CM3hCEPMEs3UXgY9hizOmTQZ",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AW0E37N9CFY5IOTSlTO9E1k8a5GtytAZU.output.row_count$",
+                "operator": "ne",
+                "right_operand": 10
+              },
+              "continue_on_failure": true,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01B575MPHG16W0K6MfANgtHR9ecNWgSCc3V",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": true,
+                  "display_name": "Completed",
+                  "result_message": "Select from Persists Table  is not working or provides wrong number of rows based on properties define in activity",
                   "skip_execution": false
                 },
                 "object_type": "definition_activity"
@@ -1546,7 +1631,7 @@
           "variables_to_update": [
             {
               "variable_to_update": "$workflow.definition_workflow_01AUY5SBZDTUS5dcHfAGQJlg2nlQCPgNYDp.output.variable_workflow_01AUY8JSOHP9S3edsYMeXBzf8UdgfafL1bb$",
-              "variable_value_new": "Activity Name | True/False\n-----------------------------------------------------------------------------\n\nSelect from system table valid db admin user :  $activity.definition_activity_01AUYDDX7CDR83d31OwDoZg08kltkhBIgNT.output.succeeded$\nSelect from master db  none admin user-negative case : $activity.definition_activity_01AUYL87G9X9R5H7aDHRICAFxypZCM9TIwe.output.succeeded$\nMake sure we support only select statement : $activity.definition_activity_01AV14WTOU8045LASE6oipXDF0bYTAmCUnT.output.succeeded$\nSupport for nested select statement : $activity.definition_activity_01AV1C442QHAE5eG1aQ1mXa7Liufw2BWvmG.output.succeeded$\nSupport for join select statement : $activity.definition_activity_01AV1XWF1VOQZ2PsRJxlcp2GKrR9tPdX0Kp.output.succeeded$\nSupport select statement Query Duration Time  condition : $activity.definition_activity_01AVX10KXZN1D3cSuVZYyN7rZqMk98kqSdf.output.succeeded$\nSelect support for view objects  : $activity.definition_activity_01AV26RRVK3SO4Mps2TLKtCCAxBRpNOmbIv.output.succeeded$\nSelect support for  CASE in a HAVING clause : $activity.definition_activity_01AVWWP0BDJNI0bhO4YieQJnJUO1Id8vPfW.output.succeeded$\nInvalid syntax in select statement : $activity.definition_activity_01AW04BVW7BGQ6WRD3pBeYrQgk5yOXb97S1.output.succeeded$\nInvalid Column Name mapped to AO from activity table outcome : $activity.definition_activity_01AYF8KHG26L84i0tU3ZbFG8iLeoKg2C4RR.output.succeeded$"
+              "variable_value_new": "Activity Name | True/False\n-----------------------------------------------------------------------------\n\nSelect from system table valid db admin user :  $activity.definition_activity_01AUYDDX7CDR83d31OwDoZg08kltkhBIgNT.output.succeeded$\nSelect from master db  none admin user-negative case : $activity.definition_activity_01AUYL87G9X9R5H7aDHRICAFxypZCM9TIwe.output.succeeded$\nMake sure we support only select statement : $activity.definition_activity_01AV14WTOU8045LASE6oipXDF0bYTAmCUnT.output.succeeded$\nSupport for nested select statement : $activity.definition_activity_01AV1C442QHAE5eG1aQ1mXa7Liufw2BWvmG.output.succeeded$\nSupport for join select statement : $activity.definition_activity_01AV1XWF1VOQZ2PsRJxlcp2GKrR9tPdX0Kp.output.succeeded$\nSupport select statement Query Duration Time  condition : $activity.definition_activity_01AVX10KXZN1D3cSuVZYyN7rZqMk98kqSdf.output.succeeded$\nSelect support for view objects  : $activity.definition_activity_01AV26RRVK3SO4Mps2TLKtCCAxBRpNOmbIv.output.succeeded$\nSelect support for  CASE in a HAVING clause : $activity.definition_activity_01AVWWP0BDJNI0bhO4YieQJnJUO1Id8vPfW.output.succeeded$\nInvalid syntax in select statement : $activity.definition_activity_01AW04BVW7BGQ6WRD3pBeYrQgk5yOXb97S1.output.succeeded$\nInvalid Column Name mapped to AO from activity table outcome : $activity.definition_activity_01AYF8KHG26L84i0tU3ZbFG8iLeoKg2C4RR.output.succeeded$\nSelect from Persist Table : $activity.definition_activity_01B5749AM63293RjmIOqryNmirq6PLRlrJa.output.succeeded$"
             }
           ]
         },
