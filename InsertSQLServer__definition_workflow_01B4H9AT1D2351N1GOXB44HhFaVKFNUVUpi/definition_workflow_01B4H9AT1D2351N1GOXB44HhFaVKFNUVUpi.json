@@ -9,18 +9,6 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "Tb_BitTABLE",
-          "scope": "local",
-          "name": "TableName",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
           "value": "",
           "scope": "output",
           "name": "Result",
@@ -28,6 +16,18 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01B58ZZT072X21FbXS8DrX9BMaBQ84y2IvJ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Tb_BitTABLE",
+          "scope": "local",
+          "name": "TableName",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx",
         "object_type": "variable_workflow"
       }
     ],
@@ -301,7 +301,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "insert into $workflow.definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi.local.variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx$ values (0 );\ninsert into [$workflow.definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi.local.variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx$] values (1 );",
           "target": {
             "override_workflow_target": true,
@@ -327,7 +327,7 @@
             "override_target_runtime_user": false,
             "target_default": true
           },
-          "skip_execution": false,
+          "skip_execution": true,
           "sql_query": "select  *  from   $workflow.definition_workflow_01B4H9AT1D2351N1GOXB44HhFaVKFNUVUpi.local.variable_workflow_01B5CKRXHRAJP78BptWBhppEyMbnviIDrYx$",
           "target": {
             "override_workflow_target": true,
